@@ -35,7 +35,7 @@ function Hero() {
     },
   ];
   return (
-    <div className="w-[calc(100%-0rem)] mx-auto rounded-md  h-screen overflow-hidden">
+    <div className="w-[calc(100%-0rem)] mx-auto rounded-md  h-[87vh] overflow-hidden">
       <Vortex
         backgroundColor="black"
         rangeY={700}
