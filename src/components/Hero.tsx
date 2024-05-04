@@ -35,7 +35,7 @@ function Hero() {
     },
   ];
   return (
-    <div className="w-[calc(100%-0rem)] mx-auto rounded-md  h-[87vh] overflow-hidden">
+    <div className="w-[calc(100%-0rem)] mx-auto rounded-md h-[70vh] lg:h-[87vh] overflow-hidden">
       <Vortex
         backgroundColor="black"
         rangeY={700}
@@ -43,8 +43,8 @@ function Hero() {
         baseHue={500}
         className="flex items-center flex-col justify-center px-2 md:px-10  py-4 w-full h-full"
       >
-        <div className="sm:flex sm min-h-[60vh] sm:min-h-screen w-full">
-          <div className="left basis-[70vw] flex flex-col justify-center items-center gap-6">
+        <div className="sm:flex lg:  min-h-[40vh] sm:min-h-screen w-full">
+          <div className="left mb-16 basis-[70vw] flex flex-col justify-center items-center gap-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold antialiased">
               Hello,I'm Avnish
             </h1>
@@ -67,7 +67,7 @@ function Hero() {
                   LinkedIn
                 </span>
               </div>
-              <div className="w-2 h-8 rounded-lg bg-green-600 relative left-6 mt-2"></div>
+              <div className="w-2 h-8 hidden md:block rounded-lg bg-green-600 relative left-6 mt-2"></div>
               <div className="flex  items-center gap-2 cursor-pointer hover:text-blue-500 group">
                 <XIcon
                   size={60}
@@ -78,7 +78,7 @@ function Hero() {
                   Twitter
                 </span>
               </div>
-              <div className="w-2 h-8 rounded-lg bg-blue-600 relative left-6 mb-2"></div>
+              <div className="w-2 h-8 hidden md:block rounded-lg bg-blue-600 relative left-6 mb-2"></div>
               <div className="flex items-center gap-2 cursor-pointer hover:text-blue-500 group">
                 <InstagramIcon
                   color="purple"

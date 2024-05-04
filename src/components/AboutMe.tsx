@@ -3,7 +3,7 @@ import { TextGenerateEffect } from "./ui/text-generate-effect";
 
 function AboutMe() {
   const words =
-    "Full-stack web developer experienced in utilizing technologies like ReactJS, ExpressJS, and JavaScript to create efficient and dynamic web applications. Proficient in database management with PostgreSQL and well-versed in Tailwind CSS for sleek UI designs. Additionally skilled in C++ programming. Committed to delivering high-quality, user-centric solutions while continuously exploring and integrating cutting-edge technologies";
+    "Full-stack web developer experienced in utilizing technologies like ReactJS , ExpressJS , and JavaScript to create efficient and dynamic web applications. Proficient in database management with PostgreSQL and well-versed in Tailwind CSS for sleek UI designs. Additionally skilled in C++ programming. Committed to delivering high-quality, user-centric solutions while continuously exploring and integrating cutting-edge technologies";
   return (
     <div className="flex flex-col gap-6 justify-center items-center p-4 dark:bg-black">
       <div>
@@ -11,7 +11,7 @@ function AboutMe() {
           About Me
         </h1>
       </div>
-      <div className="text-center mx-20">
+      <div className="text-center lg:mx-20 ">
         <TextGenerateEffect className="font-medium mb-6" words={words} />
       </div>
       <div>
