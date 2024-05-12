@@ -1,7 +1,6 @@
 import AboutMe from "@/components/AboutMe";
 import Hero from "@/components/Hero";
-import Image from "next/image";
-import { useRouter } from "next/router";
+import Skills from "@/components/Skills";
 
 export default function Home() {
   
@@ -10,6 +9,7 @@ export default function Home() {
       <div>
         <Hero />
         <AboutMe/>
+        <Skills/>
       </div>
     </div>
   );
