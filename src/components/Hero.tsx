@@ -25,9 +25,9 @@ function Hero() {
     },
   ];
   return (
-    <div className="relative flex h-full dark:bg-black w-full items-center justify-center overflow-hidden rounded-lg border bg-background">
+    <div className="relative flex h-full dark:bg-black w-full items-center justify-center overflow-hidden bg-background">
       <div className="sm:flex lg:  min-h-[40vh] sm:min-h-screen w-full">
-        <div className="left mb-16 basis-[75vw] flex flex-col justify-center items-center gap-6">
+        <div className="left mb-16 mt-10 basis-[75vw] flex flex-col justify-center items-center gap-6">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold antialiased">
             Hello,I{"'"}m Avnish
           </h1>

@@ -24,7 +24,7 @@ function Navbar() {
 
   return (
     <div className="bg-transparent dark:bg-transparent">
-      <div className="flex justify-between mx-2 p-2 dark:bg-black">
+      <div className="flex justify-between  p-2 dark:bg-black">
         <div>Avnish</div>
         <div className="lg:hidden">
           <button

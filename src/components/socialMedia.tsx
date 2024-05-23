@@ -3,7 +3,7 @@ import React from 'react'
 
 function SocialMedia() {
   return (
-    <div className="right flex items-center justify-start basis-[30vw]">
+    <div className="right flex items-center justify-start max-lg:absolute max-lg:left-[30vw]  lg:basis-[30vw]">
             {/* <Image src={portolioPhoto} width={400} alt="portfolio" /> */}
 
             <div className="flex sm:flex-col">
