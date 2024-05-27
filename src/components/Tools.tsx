@@ -13,13 +13,13 @@ const tools = [
     description: "Version control and collaboration platform",
   },
   {
-    image: "/images/react-hook-form.png",
-    title: "React Hook Form",
+    image: "/images/postman.png",
+    title: "Postman",
     description:
-      "Performant, flexible and extensible forms with easy-to-use validation",
+      "API development environment for building, testing, and documenting APIs",
   },
   {
-    image: "/images/auth.png",
+    image: "/images/auth.com.png",
     title: "Auth",
     description: "Authentication library for secure login",
   },
@@ -27,6 +27,21 @@ const tools = [
     image: "/images/ffmpeg.png",
     title: "FFmpeg",
     description: "Multimedia framework to decode, encode, transcode, etc.",
+  },
+  {
+    image: "/images/docker.png",
+    title: "Docker",
+    description: "Containerization platform for building, shipping, and running applications",
+  },
+  {
+    image: "/images/docker.png",
+    title: "Docker",
+    description: "Containerization platform for building, shipping, and running applications",
+  },
+  {
+    image: "/images/docker.png",
+    title: "Docker",
+    description: "Containerization platform for building, shipping, and running applications",
   },
   // Add more tools as needed
 ];
@@ -41,7 +56,7 @@ const ToolCard = ({
   description: string;
 }) => {
   return (
-    <div className="relative overflow-hidden rounded-lg shadow-sm shadow-white hover:scale-105 transform transition-transform duration-300">
+    <div className="relative overflow-hidden rounded-lg shadow-sm dark:shadow-white shadow-black drop-shadow-2xl  hover:scale-105 transform transition-transform duration-300">
       <img src={image} alt={title} className="w-full h-52 object-contain" />
       <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
         <h3 className="text-white text-xl font-semibold">{title}</h3>
@@ -55,7 +70,7 @@ const ToolCard = ({
 
 const Portfolio = () => {
   return (
-    <div className="">
+    <div className="mt-4 lg:mt-10">
       <div>
         <div>
           <h1 className="text-center text-6xl font-bold antialiased">Tools</h1>
