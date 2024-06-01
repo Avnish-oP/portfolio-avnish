@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { MoonIcon, SunIcon, HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -23,88 +23,62 @@ function Navbar() {
   };
 
   return (
-    <div className="bg-transparent dark:bg-transparent">
-      <div className="flex justify-between  p-2 dark:bg-black">
-        <div>Avnish</div>
+    <nav className="bg-transparent dark:bg-transparent">
+      <div className="flex justify-between items-center p-4 bg-white dark:bg-black shadow-md">
+        <div className="text-lg font-bold text-blue-500 dark:text-blue-400">Avnish</div>
         <div className="lg:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-blue-500 hover:text-blue-700 focus:outline-none"
+            className="text-gray-700 dark:text-gray-300 focus:outline-none"
           >
             {isOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <Cross1Icon className="h-6 w-6" />
             ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
+              <HamburgerMenuIcon className="h-6 w-6" />
             )}
           </button>
         </div>
-        <div className="hidden lg:flex gap-4">
-          <div
-            onClick={() => handleTabChange("home")}
-            className={`${
-              activeTab === "home" ? "border-b-2 border-blue-500" : "opacity-25"
-            }`}
-          >
-            <Link href={"/"}>Home</Link>
-          </div>
-          <div
-            onClick={() => handleTabChange("portfolio")}
-            className={`${
-              activeTab === "portfolio"
-                ? "border-b-2 border-blue-500"
-                : "opacity-25"
-            }`}
-          >
-            <Link href={"/portfolio"}>Portfolio</Link>
-          </div>
-          <div
-            onClick={() => handleTabChange("projects")}
-            className={`${
-              activeTab === "projects"
-                ? "border-b-2 border-blue-500"
-                : "opacity-25"
-            }`}
-          >
-            <Link href={"/projects"}>Projects</Link>
-          </div>
-          <div
-            onClick={() => handleTabChange("contact")}
-            className={`${
-              activeTab === "contact"
-                ? "border-b-2 border-blue-500"
-                : "opacity-25"
-            }`}
-          >
-            <Link href={"/contact"}>Contact Us</Link>
-          </div>
-        </div>
-        <div className="hidden md:block">
+        <div className="hidden lg:flex gap-6 items-center">
+          <Link href="/" onClick={() => handleTabChange("home")}
+              className={`${
+                activeTab === "home"
+                  ? "border-b-2 border-blue-500"
+                  : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
+            
+              Home
+            
+          </Link>
+          <Link href="/portfolio" onClick={() => handleTabChange("portfolio")}
+              className={`${
+                activeTab === "portfolio"
+                  ? "border-b-2 border-blue-500"
+                  : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
+            
+              Portfolio
+            
+          </Link>
+          <Link href="/projects" onClick={() => handleTabChange("projects")}
+              className={`${
+                activeTab === "projects"
+                  ? "border-b-2 border-blue-500"
+                  : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
+            
+              Projects
+            
+          </Link>
+          <Link href="/contact" onClick={() => handleTabChange("contact")}
+              className={`${
+                activeTab === "contact"
+                  ? "border-b-2 border-blue-500"
+                  : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
+            
+              Contact Us
+            
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
@@ -127,49 +101,44 @@ function Navbar() {
           </DropdownMenu>
         </div>
       </div>
-      <div className={`${isOpen ? "block" : "hidden"} lg:hidden mx-2 p-2`}>
-        <div
-          onClick={() => handleTabChange("home")}
-          className={`${
-            activeTab === "home" ? "border-b-2 border-blue-500" : "opacity-25"
-          }`}
-        >
-          <Link href={"/"}>Home</Link>
-        </div>
-        <div
-          onClick={() => handleTabChange("portfolio")}
-          className={`${
-            activeTab === "portfolio"
-              ? "border-b-2 border-blue-500"
-              : "opacity-25"
-          }`}
-        >
-          <Link href={"/portfolio"}>Portfolio</Link>
-        </div>
-        <div
-          onClick={() => handleTabChange("projects")}
-          className={`${
-            activeTab === "projects"
-              ? "border-b-2 border-blue-500"
-              : "opacity-25"
-          }`}
-        >
-          <Link href={"/projects"}>Projects</Link>
-        </div>
-        <div
-          onClick={() => handleTabChange("contact")}
-          className={`${
-            activeTab === "contact"
-              ? "border-b-2 border-blue-500"
-              : "opacity-25"
-          }`}
-        >
-          <Link href={"/contact"}>Contact Us</Link>
-        </div>
-        <div className="md:block mt-4">
+      {isOpen && (
+        <div className="lg:hidden mx-4 py-4 space-y-2 bg-white dark:bg-black shadow-md rounded-lg">
+          <Link href="/" onClick={() => handleTabChange("home")}
+              className={`block ${
+                activeTab === "home" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
+            
+            
+              Home
+            
+          </Link>
+          <Link href="/portfolio" onClick={() => handleTabChange("portfolio")}
+              className={`block ${
+                activeTab === "portfolio" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
+            
+              Portfolio
+            
+          </Link>
+          <Link href="/projects" onClick={() => handleTabChange("projects")}
+              className={`block ${
+                activeTab === "projects" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
+           
+              Projects
+            
+          </Link>
+          <Link href="/contact" onClick={() => handleTabChange("contact")}
+              className={`block ${
+                activeTab === "contact" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
+            
+              Contact Us
+            
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
+              <Button variant="outline" size="icon" className="mt-4">
                 <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 <span className="sr-only">Toggle theme</span>
@@ -188,8 +157,8 @@ function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      </div>
-    </div>
+      )}
+    </nav>
   );
 }
 

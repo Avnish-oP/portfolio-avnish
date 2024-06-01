@@ -19,9 +19,9 @@ const tools = [
       "API development environment for building, testing, and documenting APIs",
   },
   {
-    image: "/images/auth.com.png",
-    title: "Auth",
-    description: "Authentication library for secure login",
+    image: "/images/firebase.png",
+    title: "Firebase",
+    description: "Platform for building web and mobile applications",
   },
   {
     image: "/images/ffmpeg.png",
@@ -34,14 +34,14 @@ const tools = [
     description: "Containerization platform for building, shipping, and running applications",
   },
   {
-    image: "/images/docker.png",
-    title: "Docker",
-    description: "Containerization platform for building, shipping, and running applications",
+    image: "/images/tailwind.png",
+    title: "Tailwind",
+    description: "Utility-first CSS framework for rapid UI development",
   },
   {
-    image: "/images/docker.png",
-    title: "Docker",
-    description: "Containerization platform for building, shipping, and running applications",
+    image: "/images/appwrite.png",
+    title: "Appwrite",
+    description: "Open-source backend server for web and mobile developers",
   },
   // Add more tools as needed
 ];

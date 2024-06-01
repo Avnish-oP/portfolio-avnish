@@ -11,7 +11,7 @@ function Hero() {
       text: "I'm",
     },
     {
-      text: "full-stack ",
+      text: "a full-stack ",
     },
     {
       text: "developer",
@@ -25,15 +25,18 @@ function Hero() {
       className: "text-blue-500 dark:text-blue-500",
     },
   ];
+
   return (
     <div className="relative flex h-full dark:bg-black w-full items-center justify-center overflow-hidden bg-background">
-      <div className="sm:flex md:flex lg:  min-h-[70vh] lg:min-h-screen w-full justify-center items-center">
-        <div className="left mb-16 mt-20 basis-[75vw] flex flex-col justify-center items-center gap-10 lg:gap-6">
-          <h1 className="text-4xl mt-12 lg:mt-0 md:text-5xl lg:text-6xl font-bold antialiased">
-            Hello,I{"'"}m Avnish
+      <div className="sm:flex md:flex min-h-[70vh]  lg:min-h-screen w-full justify-center items-center">
+        <div className="left mb-16 mt-20 basis-[70vw] flex flex-col justify-center items-center gap-10 lg:gap-6">
+          <h1 className="text-4xl mt-12 lg:mt-0 md:text-5xl lg:text-6xl font-bold antialiased text-center text-white">
+            Hello, I'm Avnish
           </h1>
-          <TypewriterEffect words={words} />
-          <Link href={"/contact"} className="mt-8 bg-blue-500 text-white px-4 py-2 rounded-lg">
+          <div className="mt-4">
+            <TypewriterEffect words={words} />
+          </div>
+          <Link href={"/contact"} className="mt-8 inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors duration-300">
             Contact Me
           </Link>
         </div>
@@ -41,7 +44,7 @@ function Hero() {
           <SocialMedia />
         </div>
       </div>
-      <div className=" lg:hidden opacity-80">
+      <div className="lg:hidden opacity-80">
         <DotPattern
           width={20}
           height={20}
