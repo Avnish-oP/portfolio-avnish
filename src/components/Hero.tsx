@@ -31,7 +31,7 @@ function Hero() {
       <div className="sm:flex md:flex min-h-[70vh]  lg:min-h-screen w-full justify-center items-center">
         <div className="left mb-16 mt-20 basis-[70vw] flex flex-col justify-center items-center gap-10 lg:gap-6">
           <h1 className="text-4xl mt-12 lg:mt-0 md:text-5xl lg:text-6xl font-bold antialiased text-center text-white">
-            Hello, I'm Avnish
+            Hello, I{"'"}m Avnish
           </h1>
           <div className="mt-4">
             <TypewriterEffect words={words} />
