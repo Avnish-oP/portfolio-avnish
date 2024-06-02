@@ -4,11 +4,12 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import "../../public/porfolio-icon.jpeg"
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Welcome to My Website",
+  title: "Avnish's Portfolio",
   description: "This is portfolio website of Avnish, where you can find his projects, blogs and resume.",
   icons:{
     icon: "../../public/porfolio-icon.jpeg",
