@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ProjectSection from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Tools from "@/components/Tools";
+import Resume from "@/components/resume";
 
 export default function Home() {
   
@@ -14,6 +15,7 @@ export default function Home() {
         <Skills/>
         <Tools/>
         <ProjectSection/>
+        
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
+import Resume from '@/components/resume'
 import React from 'react'
 
 function page() {
   return (
     <div>
-      portfolio
+      <Resume/>
     </div>
   )
 }
