@@ -18,7 +18,7 @@ const Footer = () => {
           <div>
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">About Me</h2>
             <p className="text-gray-600 dark:text-gray-400">
-              I'm a passionate developer focused on creating beautiful and functional web applications.
+              I{"'"}m a passionate developer focused on creating beautiful and functional web applications.
             </p>
           </div>
 
