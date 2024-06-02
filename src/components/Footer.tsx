@@ -58,34 +58,31 @@ const Footer = () => {
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Follow Me</h2>
             <div className="flex space-x-4">
               <div className="flex items-center gap-2 cursor-pointer group">
+                <a href="https://www.linkedin.com/in/avnish-gupta-23245a273/" target="_blank" rel="noopener noreferrer" >
                 <LucideLinkedin
                   size={30}
                   color="blue"
                   className="transition-transform duration-500 ease-in-out transform group-hover:scale-125"
                 />
-                <span className="hidden md:inline text-xl font-bold text-gray-800 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                  LinkedIn
-                </span>
+                </a>
               </div>
               <div className="flex items-center gap-2 cursor-pointer group">
+              <a href="https://twitter.com/Avnish__gupta" target="_blank" rel="noopener noreferrer" >
                 <XIcon
                   size={30}
                   color={isDarkMode ? "white" : "black"}
                   className="transition-transform duration-500 ease-in-out transform group-hover:scale-125"
                 />
-                <span className="hidden md:inline text-xl font-bold text-gray-800 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                  Twitter
-                </span>
+                </a>
               </div>
               <div className="flex items-center gap-2 cursor-pointer group">
+              <a href="https://www.instagram.com/avnish_kumar_gupta/?hl=en" target="_blank" rel="noopener noreferrer" >
                 <InstagramIcon
                   size={30}
                   color="purple"
                   className="transition-transform duration-500 ease-in-out transform group-hover:scale-125"
                 />
-                <span className="hidden md:inline text-xl font-bold text-purple-800 dark:text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                  Instagram
-                </span>
+               </a>
               </div>
             </div>
           </div>

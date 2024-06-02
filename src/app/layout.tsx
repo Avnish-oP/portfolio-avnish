@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "This is portfolio website of Avnish, where you can find his projects, blogs and resume.",
   icons:{
     icon: "../../public/porfolio-icon.jpeg",
-  }
+  },
 };
 
 export default function RootLayout({
