@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { MoonIcon, SunIcon, HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
@@ -21,10 +21,26 @@ function Navbar() {
     setActiveTab(tabName);
     setIsOpen(false);
   };
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+  const [isHidden, setIsHidden] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollTop = window.scrollY;
+      const isScrollingDown = currentScrollTop > lastScrollTop;
+      setIsHidden(isScrollingDown);
+      setLastScrollTop(currentScrollTop);
+    };
+
+    document.addEventListener("scroll", handleScroll);
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollTop]);
 
   return (
-    <nav className="bg-transparent dark:bg-transparent">
-      <div className="flex justify-between items-center p-4 bg-white dark:bg-black shadow-md">
+    <nav className={`${isHidden ? "hidden" : "fixed"} top-0 w-full bg-transparent dark:bg-transparent z-50`}>
+      <div className="flex justify-between items-center px-4 py-2 bg-white dark:bg-black dark:bg-opacity-75 shadow-md">
         <div className="text-lg font-bold text-blue-500 dark:text-blue-400">Avnish</div>
         <div className="lg:hidden">
           <button
