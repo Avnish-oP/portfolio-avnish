@@ -56,7 +56,7 @@ function Navbar() {
                   : "opacity-75 hover:opacity-100"
               } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
             
-              Portfolio
+              Resume
             
           </Link>
           <Link href="/projects" onClick={() => handleTabChange("projects")}
@@ -117,7 +117,7 @@ function Navbar() {
                 activeTab === "portfolio" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
               } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
             
-              Portfolio
+              Resume
             
           </Link>
           <Link href="/projects" onClick={() => handleTabChange("projects")}
