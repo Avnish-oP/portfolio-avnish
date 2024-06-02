@@ -1,11 +1,10 @@
-// components/ProjectSection.js
-
+import React from 'react';
 import Link from 'next/link';
 
 const projects = [
   {
-    name: "Project One",
-    description: "This is a description of Project One.",
+    name: "Shivalik Study Circle",
+    description: "A freelance website for a coaching institute. Built with Next.js, Tailwind CSS, have features like blog, announcements and notes sharing, and contact form.",
     status: "Completed",
     imageUrl: "/images/academy app1.png",
   },
@@ -17,82 +16,59 @@ const projects = [
   },
 ];
 
-const ProjectSection = () => {
+const ProjectCard = ({ project }:any) => {
   return (
-    <div className="py-16 bg-black transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">Projects</h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-            My Work
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="relative bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105"
-            >
-              <img
-                className="w-full h-56 object-cover brightness-75 grayscale hover:grayscale-0 transition duration-500"
-                src={project.imageUrl}
-                alt={project.name}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black to-transparent opacity-75"></div>
-              <div className="absolute -bottom-5 left-0 p-6">
-                <h3 className="text-lg font-bold antialiased brightness-125 leading-6 text-white">
-                  {project.name}
-                </h3>
-                <p className="mt-2 text-base font-semibold antialiased brightness-150 text-gray-300">
-                  {project.description}
-                </p>
-                <p className="mt-4 text-sm text-green-400">
-                  Status: {project.status}
-                </p>
-              </div>
-              <Link href={`/projects/${index}`}>
-                <div className="absolute bottom-4 right-4 p-2 bg-indigo-600 text-white rounded-full shadow-md hover:bg-indigo-700 transition-colors duration-300 cursor-pointer">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-        <div className="mt-16 text-center">
-          <Link href="/projects">
-            <div className="inline-block p-3 bg-indigo-600 text-white rounded-full shadow-md hover:bg-indigo-700 transition-colors duration-300 cursor-pointer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-8 h-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </div>
+    <div
+      key={project.name}
+      className="project-card group rounded-lg bg-white dark:bg-black overflow-hidden shadow-md transform transition-transform hover:scale-105 duration-300"
+    >
+      <img
+        src={project.imageUrl}
+        alt={project.name}
+        className="w-full h-48 object-cover bg-gray-500 dark:bg-gray-700"
+      />
+      <div className="p-4">
+        <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 transition duration-300">
+          {project.name}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400 mt-2">{project.description}</p>
+        <div className="flex items-center mt-4">
+          <span className={`inline-block mr-2 text-sm text-gray-500 dark:text-gray-400  `}>
+            Status: <span className={`${project.status==="Completed"?"text-green-500 dark:text-green-500":"text-yellow-500  dark:text-yellow-400"}`}>{project.status}</span> 
+          </span>
+          <Link href={`/projects/${project.name}`}>
+            <button className="text-xs text-indigo-600 hover:text-indigo-700 font-bold focus:outline-none">
+              Show Details
+            </button>
           </Link>
         </div>
       </div>
     </div>
+  );
+};
+
+const ProjectSection = () => {
+  return (
+    <section className="project-section py-16 bg-gray-50 dark:bg-black transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">Projects</h2>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">A selection of some recent projects I have worked on.</p>
+        </div>
+        <div className="grid  gap-6 md:grid-cols-2 lg:grid-cols-2">
+          {projects.map((project) => (
+            <ProjectCard key={project.name} project={project} />
+          ))}
+        </div>
+        <div className="mt-12 text-center">
+          <Link href="/projects">
+            <button className="px-4 sm:px-6 py-3 text-lg font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 cursor-pointer">
+              View All Projects
+            </button>
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 };
 
