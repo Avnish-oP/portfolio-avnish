@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Head from "next/head";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -11,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Welcome to My Website",
   description: "This is portfolio website of Avnish, where you can find his projects, blogs and resume.",
+  icons:{
+    icon: "../../public/porfolio-icon.jpeg",
+  }
 };
 
 export default function RootLayout({
@@ -20,11 +22,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        
-        <link rel="icon" href="/favicon.ico" />
-        
-      </Head>
       <body className={inter.className}>
         <div>
           <ThemeProvider
