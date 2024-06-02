@@ -45,7 +45,7 @@ const Resume = () => {
         </p>
         <ul className="list-disc pl-6">
           <li>
-            Contributed to the development of the college's food ordering app
+            Contributed to the development of the college{"'"}s food ordering app
             using React.js.
           </li>
           <li>
