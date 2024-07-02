@@ -3,44 +3,26 @@ import React from 'react'
 
 function SocialMedia() {
   return (
-    <div className="right flex items-center justify-start max-lg:absolute max-lg:left-[30vw]  lg:basis-[30vw]">
-            {/* <Image src={portolioPhoto} width={400} alt="portfolio" /> */}
-
-            <div className="flex sm:flex-col">
-              <div className="flex items-center gap-2 cursor-pointer hover:text-blue-500 group">
-                <LucideLinkedin
-                  size={50}
-                  color="blue"
-                  className="transition-transform duration-500 ease-in-out transform group-hover:scale-125"
-                />
-                <span className="md:inline hidden text-3xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                  LinkedIn
-                </span>
-              </div>
-              <div className="w-2 h-8 hidden md:block rounded-lg bg-green-600 relative left-6 mt-2"></div>
-              <div className="flex  items-center gap-2 cursor-pointer hover:text-blue-500 group">
-                <XIcon
-                  size={60}
-                  color="white"
-                  className="transition-transform  duration-500 ease-in-out transform group-hover:scale-125"
-                />
-                <span className="md:inline hidden text-3xl font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                  Twitter
-                </span>
-              </div>
-              <div className="w-2 h-8 hidden md:block rounded-lg bg-blue-600 relative left-6 mb-2"></div>
-              <div className="flex items-center gap-2 cursor-pointer hover:text-blue-500 group">
-                <InstagramIcon
-                  color="purple"
-                  size={48}
-                  className="transition-transform duration-500 ease-in-out transform group-hover:scale-125"
-                />
-                <span className="md:inline hidden text-3xl text-purple-800 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out">
-                  Instagram
-                </span>
-              </div>
-            </div>
-          </div>
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-6">
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="group">
+        <div className="flex items-center gap-3 p-3 border border-gray-300 rounded-full hover:bg-blue-100 transition-colors duration-300">
+          <LucideLinkedin size={24} className="text-blue-600 group-hover:scale-110 transition-transform duration-300" />
+          <span className="hidden lg:inline text-lg font-semibold text-gray-700 group-hover:text-blue-600 transition-colors duration-300">LinkedIn</span>
+        </div>
+      </a>
+      <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" className="group">
+        <div className="flex items-center gap-3 p-3 border border-gray-300 rounded-full hover:bg-blue-100 transition-colors duration-300">
+          <XIcon size={24} className="text-blue-600 group-hover:scale-110 transition-transform duration-300" />
+          <span className="hidden lg:inline text-lg font-semibold text-gray-700 group-hover:text-blue-600 transition-colors duration-300">Twitter</span>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" className="group">
+        <div className="flex items-center gap-3 p-3 border border-gray-300 rounded-full hover:bg-pink-100 transition-colors duration-300">
+          <InstagramIcon size={24} className="text-pink-600 group-hover:scale-110 transition-transform duration-300" />
+          <span className="hidden lg:inline text-lg font-semibold text-gray-700 group-hover:text-pink-600 transition-colors duration-300">Instagram</span>
+        </div>
+      </a>
+    </div>
   )
 }
 
