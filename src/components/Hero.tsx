@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
           <TypewriterEffect words={words} />
         </div>
         <p className="mt-4 text-lg text-gray-400">
-          I specialize in building high-quality web applications with modern technologies. Let's create something amazing together!
+          I specialize in building high-quality web applications with modern technologies. Let{"'"}s create something amazing together!
         </p>
         <div className="mt-8 flex justify-center space-x-4">
           <Link href="/contact">
