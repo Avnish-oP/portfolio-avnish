@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useRef } from "react";
 import { spline } from "@georgedoescode/spline";
 import { TypewriterEffect } from "./ui/typewriter-effect";
@@ -8,90 +8,75 @@ import Image from "next/image";
 
 const Hero: React.FC = () => {
   const words = [
-    {
-      text: "I'm",
-    },
-    {
-      text: "a full-stack ",
-    },
-    {
-      text: "developer",
-      className: "text-green-500 dark:text-green-500",
-    },
-    {
-      text: "and",
-    },
-    {
-      text: "programmer.",
-      className: "text-blue-500 dark:text-blue-500",
-    },
+    { text: "I'm" },
+    { text: "a full-stack " },
+    { text: "developer", className: "text-green-500 dark:text-green-500" },
+    { text: "and" },
+    { text: "programmer.", className: "text-blue-500 dark:text-blue-500" },
   ];
 
-  const svgRef = useRef<SVGSVGElement>(null);
+  const backgroundRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    if (svgRef.current) {
-      const points = Array.from({ length: 20 }, () => [
-        Math.random() * window.innerWidth,
-        Math.random() * window.innerHeight,
-      ]);
+    const svg = backgroundRef.current;
 
-      svgRef.current.innerHTML = `
-        <path d="${spline(points, 1, true)}" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" />
-      `;
+    if (svg) {
+      const points = [
+        { x: 0, y: 100 },
+        { x: 200, y: 300 },
+        { x: 400, y: 100 },
+        { x: 600, y: 300 },
+        { x: 800, y: 100 },
+        { x: 1000, y: 300 },
+      ];
+
+      const pathData = spline(points);
+
+      const path = svg.querySelector("path");
+      if (path) {
+        path.setAttribute("d", pathData);
+      }
     }
   }, []);
 
   return (
-    <div className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-background dark:bg-black">
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
       <svg
-        ref={svgRef}
-        width="100%"
-        height="100%"
-        className="absolute inset-0"
-      />
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen w-full px-10">
-        <div className="sm:flex md:flex min-h-[70vh] lg:min-h-screen w-full justify-between items-center p-4">
-          <div className="left mb-16 mt-20 lg:mt-0 basis-[50vw] flex flex-col justify-center items-start gap-10 lg:gap-6">
-            <h1 className="text-4xl mt-12 lg:mt-0 md:text-5xl lg:text-6xl font-bold antialiased text-white">
-              Hello, I{"'"}m Avnish
-            </h1>
-            <div className="mt-4 text-2xl text-white">
-              <TypewriterEffect words={words} />
-            </div>
-            <p className="text-lg mt-4 text-gray-300">
-              I specialize in building high-quality web applications with modern technologies. Let{"'"}s create something amazing together!
-            </p>
-            <Link href={"/contact"} className="mt-8 inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors duration-300">
+        ref={backgroundRef}
+        className="absolute inset-0 w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1000 300"
+      >
+        <path fill="none" stroke="#3b82f6" strokeWidth="5" />
+      </svg>
+      <div className="z-10 w-full max-w-5xl px-4 py-16 text-center">
+        <Image
+          src="/images/dp.png" // Replace with your image path
+          alt="Profile Image"
+          width={150}
+          height={150}
+          className="mx-auto mb-8 rounded-full border-4 border-white shadow-lg transition-transform duration-300 hover:scale-105"
+        />
+        <h1 className="text-5xl font-bold md:text-6xl">Hello, I{"'"}m Avnish</h1>
+        <div className="mt-4 text-2xl">
+          <TypewriterEffect words={words} />
+        </div>
+        <p className="mt-4 text-lg text-gray-400">
+          I specialize in building high-quality web applications with modern technologies. Let's create something amazing together!
+        </p>
+        <div className="mt-8 flex justify-center space-x-4">
+          <Link href="/contact">
+            <a className="inline-block rounded-lg bg-blue-500 px-6 py-3 text-lg font-medium text-white transition-colors duration-300 hover:bg-blue-600">
               Contact Me
-            </Link>
-          </div>
-          <div className="hidden lg:flex right rounded-full border-2  object-cover justify-center items-center lg:mt-22">
-            <Image
-              src="/images/dp.png" // replace with your hero image path
-              alt="Hero Image"
-              width={350}
-              height={350}
-              className="rounded-full scale-105 shadow-lg transition-transform duration-500 hover:scale-100"
-            />
-          </div>
+            </a>
+          </Link>
+          <Link href="/portfolio">
+            <a className="inline-block rounded-lg border border-gray-400 px-6 py-3 text-lg font-medium text-gray-400 transition-colors duration-300 hover:border-gray-300 hover:text-gray-300">
+              My Work
+            </a>
+          </Link>
         </div>
-        <div className="flex lg:hidden relative z-10 flex-col items-center">
-          <div className="rounded-full border-2 object-cover justify-center items-center mt-4">
-            <Image
-              src="/images/dp.png" // replace with your hero image path
-              alt="Hero Image"
-              width={250}
-              height={250}
-              className="rounded-full scale-105 shadow-lg transition-transform duration-500 hover:scale-100"
-            />
-          </div>
-        </div>
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center lg:hidden">
-          <SocialMedia />
-        </div>
-        <div className="absolute bottom-8 left-0 right-0 hidden lg:flex justify-center">
+        <div className="mt-8">
           <SocialMedia />
         </div>
       </div>
