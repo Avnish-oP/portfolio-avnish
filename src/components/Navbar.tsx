@@ -1,7 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { MoonIcon, SunIcon, HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
+import {
+  MoonIcon,
+  SunIcon,
+  HamburgerMenuIcon,
+  Cross1Icon,
+} from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -39,9 +44,15 @@ function Navbar() {
   }, [lastScrollTop]);
 
   return (
-    <nav className={`${isHidden ? "hidden" : "fixed"} top-0 w-full bg-transparent dark:bg-transparent z-50`}>
-      <div className="flex justify-between items-center px-4 py-2 bg-white dark:bg-black dark:bg-opacity-75 shadow-md">
-        <div className="text-lg font-bold text-blue-500 dark:text-blue-400">Avnish</div>
+    <nav
+      className={`${
+        isHidden ? "-translate-y-full" : "translate-y-0"
+      } fixed top-0 w-full bg-white dark:bg-black shadow-md z-50 transition-transform duration-300`}
+    >
+      <div className="flex justify-between items-center px-4 py-2">
+        <div className="text-lg font-bold text-blue-500 dark:text-blue-400">
+          Avnish
+        </div>
         <div className="lg:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -55,46 +66,20 @@ function Navbar() {
           </button>
         </div>
         <div className="hidden lg:flex gap-6 items-center">
-          <Link href="/" onClick={() => handleTabChange("home")}
+          {["home", "resume", "projects", "contact"].map((tab) => (
+            <Link
+              key={tab}
+              href={`/${tab === "home" ? "" : tab}`}
+              onClick={() => handleTabChange(tab)}
               className={`${
-                activeTab === "home"
+                activeTab === tab
                   ? "border-b-2 border-blue-500"
                   : "opacity-75 hover:opacity-100"
-              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
-            
-              Home
-            
-          </Link>
-          <Link href="/portfolio" onClick={() => handleTabChange("portfolio")}
-              className={`${
-                activeTab === "portfolio"
-                  ? "border-b-2 border-blue-500"
-                  : "opacity-75 hover:opacity-100"
-              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
-            
-              Resume
-            
-          </Link>
-          <Link href="/projects" onClick={() => handleTabChange("projects")}
-              className={`${
-                activeTab === "projects"
-                  ? "border-b-2 border-blue-500"
-                  : "opacity-75 hover:opacity-100"
-              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
-            
-              Projects
-            
-          </Link>
-          <Link href="/contact" onClick={() => handleTabChange("contact")}
-              className={`${
-                activeTab === "contact"
-                  ? "border-b-2 border-blue-500"
-                  : "opacity-75 hover:opacity-100"
-              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
-            
-              Contact Us
-            
-          </Link>
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </Link>
+          ))}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
@@ -118,40 +103,21 @@ function Navbar() {
         </div>
       </div>
       {isOpen && (
-        <div className="lg:hidden mx-4 py-4 space-y-2 bg-white dark:bg-black shadow-md rounded-lg">
-          <Link href="/" onClick={() => handleTabChange("home")}
+        <div className="lg:hidden px-4 py-4 space-y-2 bg-white dark:bg-black shadow-md rounded-lg">
+          {["home", "portfolio", "projects", "contact"].map((tab) => (
+            <Link
+              key={tab}
+              href={`/${tab === "home" ? "" : tab}`}
+              onClick={() => handleTabChange(tab)}
               className={`block ${
-                activeTab === "home" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
-              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
-            
-            
-              Home
-            
-          </Link>
-          <Link href="/portfolio" onClick={() => handleTabChange("portfolio")}
-              className={`block ${
-                activeTab === "portfolio" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
-              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
-            
-              Resume
-            
-          </Link>
-          <Link href="/projects" onClick={() => handleTabChange("projects")}
-              className={`block ${
-                activeTab === "projects" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
-              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
-           
-              Projects
-            
-          </Link>
-          <Link href="/contact" onClick={() => handleTabChange("contact")}
-              className={`block ${
-                activeTab === "contact" ? "border-b-2 border-blue-500" : "opacity-75 hover:opacity-100"
-              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}>
-            
-              Contact Us
-            
-          </Link>
+                activeTab === tab
+                  ? "border-b-2 border-blue-500"
+                  : "opacity-75 hover:opacity-100"
+              } text-gray-800 dark:text-gray-200 px-3 py-2 transition-opacity`}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </Link>
+          ))}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon" className="mt-4">
