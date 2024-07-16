@@ -9,7 +9,7 @@ export default function Home() {
   
   return (
     <div>
-      <div className="">
+      <div className="bg-gradient-to-r from-gray-200 dark:from-black via-white dark:via-gray-900 to-white dark:to-black bg-white bg-opacity-50">
         <Hero />
         <AboutMe/>
         <Skills/>

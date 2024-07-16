@@ -36,7 +36,7 @@ export default function AnimatedBeamDemo() {
 
   return (
     <div
-      className="relative flex flex-col  items-center justify-center overflow-hidden rounded-lg dark:bg-black  bg-background p-10 md:shadow-xl"
+      className="relative flex flex-col  items-center justify-center overflow-hidden rounded-lg   p-10 md:shadow-xl"
       ref={containerRef}
     >
       <div className="my-4">

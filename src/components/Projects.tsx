@@ -20,7 +20,7 @@ const ProjectCard = ({ project }:any) => {
   return (
     <div
       key={project.name}
-      className="project-card group rounded-lg bg-white dark:bg-black overflow-hidden shadow-md transform transition-transform hover:scale-105 duration-300"
+      className="project-card group rounded-lg  overflow-hidden shadow-md transform transition-transform hover:scale-105 duration-300"
     >
       <img
         src={project.imageUrl}
@@ -49,7 +49,7 @@ const ProjectCard = ({ project }:any) => {
 
 const ProjectSection = () => {
   return (
-    <section className="project-section py-16 bg-gray-50 dark:bg-black transition-colors duration-300">
+    <section className="project-section py-16 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">Projects</h2>

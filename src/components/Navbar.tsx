@@ -47,10 +47,10 @@ function Navbar() {
     <nav
       className={`${
         isHidden ? "-translate-y-full" : "translate-y-0"
-      } fixed top-0 w-full bg-white dark:bg-black shadow-md z-50 transition-transform duration-300`}
+      } fixed top-0 w-full bg-transparent dark:bg-transparent shadow-md z-50 transition-transform duration-300`}
     >
       <div className="flex justify-between items-center px-4 py-2">
-        <div className="text-lg font-bold text-blue-500 dark:text-blue-400">
+        <div className="text-lg font-bold text-black dark:text-blue-400">
           Avnish
         </div>
         <div className="lg:hidden">
