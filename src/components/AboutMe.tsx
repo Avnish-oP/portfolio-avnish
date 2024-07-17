@@ -70,7 +70,7 @@ function AboutMe() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen dark:text-white justify-around items-center">
+    <div className="flex flex-col md:flex-row min-h-screen dark:text-white justify-around items-center">
       <div className="md:w-1/2 flex flex-col justify-center items-center p-8">
         <div className="text-center md:text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold antialiased mb-6">
