@@ -18,6 +18,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
 import Link from "next/link";
+import { BufferGeometry, Material, Mesh, NormalBufferAttributes, Object3DEventMap, Vector3 } from "three";
 
 function AboutMe() {
   const words =
@@ -42,19 +43,20 @@ function AboutMe() {
     (Math.random() - 0.5) * 10,
   ];
 
-  const FloatingIcon = ({ icon, color }) => {
-    const ref = useRef();
-    const [position, setPosition] = useState(randomPosition);
+  const FloatingIcon = ({ icon, color }: { icon: any; color: string }) => {
+    const ref = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[], Object3DEventMap>>(null);
+    const [position, setPosition] = useState<Vector3>(new Vector3(...randomPosition()));
 
     useFrame(() => {
       if (ref.current) {
-        ref.current.rotation.y += 0.01;
-        ref.current.rotation.x += 0.01;
-        ref.current.position.y += 0.01;
-
-        if (ref.current.position.y > 5) {
-          setPosition(randomPosition);
-          ref.current.position.set(...position);
+        const currentRef: any = ref.current;
+        currentRef.rotation.y += 0.01;
+        currentRef.rotation.x += 0.01;
+        currentRef.position.y += 0.01;
+    
+        if (currentRef.position.y > 5) {
+          setPosition(new Vector3(...randomPosition()));
+          currentRef.position.set(...position);
         }
       }
     });
