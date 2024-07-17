@@ -37,8 +37,8 @@ const Hero: React.FC = () => {
       <svg ref={svgRef} width="100%" height="100%" className="absolute inset-0" />
       <div className="relative z-10 flex flex-col items-center justify-center  w-full px-2 lg:px-10">
         <div className="flex flex-col lg:flex-row min-h-[70vh] lg:min-h-screen w-full justify-between items-center px-4">
-          <div className="left mb-16 mt-20 lg:mt-0 basis-[50vw] flex flex-col justify-center items-center lg:items-center gap-10 lg:gap-6">
-            <h1 className="text-4xl mt-12 lg:mt-0 md:text-5xl lg:text-6xl font-bold antialiased dark:text-white text-center lg:text-left">
+          <div className="left mb-16 mt-16 lg:mt-0 basis-[50vw] flex flex-col justify-center items-center lg:items-center gap-10 lg:gap-6">
+            <h1 className="text-4xl mt-4 lg:mt-0 md:text-5xl lg:text-6xl font-bold antialiased dark:text-white text-center lg:text-left">
               Hello, I{"'"}m Avnish
             </h1>
             <div className="mt-4 text-3xl dark:text-white text-center lg:text-left">
