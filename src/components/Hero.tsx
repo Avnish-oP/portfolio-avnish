@@ -33,18 +33,18 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background bg-gradient-to-r from-gray-200 dark:from-black via-white dark:via-gray-900 to-gray-200 dark:to-black">
+    <div className="relative -top-16 flex min-h-screen w-full items-center justify-center overflow-hidden bg-background bg-gradient-to-r from-gray-200 dark:from-black via-white dark:via-gray-900 to-gray-200 dark:to-black">
       <svg ref={svgRef} width="100%" height="100%" className="absolute inset-0" />
       <div className="relative z-10 flex flex-col items-center justify-center  w-full px-2 lg:px-10">
         <div className="flex flex-col lg:flex-row min-h-[70vh] lg:min-h-screen w-full justify-between items-center p-4">
-          <div className="left mb-16 mt-20 lg:mt-0 basis-[50vw] flex flex-col justify-center items-center lg:items-start gap-10 lg:gap-6">
+          <div className="left mb-16 mt-20 lg:mt-0 basis-[50vw] flex flex-col justify-center items-center lg:items-center gap-10 lg:gap-6">
             <h1 className="text-4xl mt-12 lg:mt-0 md:text-5xl lg:text-6xl font-bold antialiased dark:text-white text-center lg:text-left">
               Hello, I{"'"}m Avnish
             </h1>
             <div className="mt-4 text-3xl dark:text-white text-center lg:text-left">
               <TypewriterEffect className="text-2xl" words={words} />
             </div>
-            <p className="text-xl mt-4 text-center lg:text-left font-medium dark:text-gray-100 text-gray-900">
+            <p className="text-xl mt-4 text-center lg:text-center font-medium dark:text-gray-100 text-gray-900">
               I specialize in building high-quality web applications with modern technologies. Let{"'"}s create something amazing together!
             </p>
             <Link href={"/contact"} className="mt-8 inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors duration-300">
