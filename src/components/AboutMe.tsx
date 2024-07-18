@@ -100,7 +100,7 @@ function AboutMe() {
           </Link>
         </div>
       </div>
-      <div className="relative overflow-hidden lg:h-[70vh] h-full lg:w-[35vw] w-[85vw]">
+      <div className="relative overflow-hidden lg:h-[70vh] h-[35vh] lg:w-[35vw] w-[85vw]">
         <Canvas className="h-full">
           <Suspense fallback={null}>
             <Stars />
