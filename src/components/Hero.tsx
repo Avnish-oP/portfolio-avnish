@@ -9,7 +9,8 @@ import Image from "next/image";
 const Hero: React.FC = () => {
   const words = [
     { text: "I'm " },
-    { text: "a full-stack " },
+    {text:"a"},
+    { text: " full-stack " },
     { text: "developer", className: "text-green-500 dark:text-green-500" },
     { text: "and" },
     { text: "programmer.", className: "text-blue-500 dark:text-blue-500" },
@@ -44,14 +45,14 @@ const Hero: React.FC = () => {
         <div className="flex flex-col lg:flex-row min-h-[70vh] lg:min-h-screen w-full justify-between items-center px-4">
           <div className="left mb-16 mt-16 lg:mt-0 basis-[50vw] flex flex-col justify-center items-center lg:items-center gap-10 lg:gap-6">
             <h1 className="text-4xl  lg:mt-0 md:text-5xl lg:text-6xl font-bold antialiased dark:text-white text-center lg:text-left">
-              Hello, I{"'"}m Avnish
+              Hello, I&apos;m Avnish
             </h1>
             <div className="lg:mt-4 text-3xl dark:text-white text-center lg:text-left">
               <TypewriterEffect className="text-2xl" words={words} />
             </div>
             <p className="text-lg md:xl md:mt-4 text-center lg:text-center font-medium dark:text-gray-100 text-gray-900">
               I specialize in building high-quality web applications with modern
-              technologies. Let{"'"}s create something amazing together!
+              technologies. Let&apos;s create something amazing together!
             </p>
             <Link
               href={"/contact"}
