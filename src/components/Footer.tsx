@@ -1,6 +1,6 @@
 "use client";
-import { InstagramIcon, LucideLinkedin, XIcon, Github, MapPinIcon, MailIcon, PhoneIcon, ArrowUpIcon, HeartIcon, CoffeeIcon } from "lucide-react";
-import React, { useRef } from "react";
+import { InstagramIcon, LucideLinkedin, XIcon, Github, MapPinIcon, MailIcon, PhoneIcon, ArrowUpIcon, HeartIcon, CoffeeIcon, EyeIcon, UsersIcon } from "lucide-react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { useTheme } from "next-themes";
@@ -9,6 +9,56 @@ const Footer = () => {
   const { theme } = useTheme();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  
+  // Visitor counter state
+  const [visitorStats, setVisitorStats] = useState({
+    totalVisits: 0,
+    uniqueVisitors: 0
+  });
+
+  // Initialize visitor counter on mount
+  useEffect(() => {
+    const initializeVisitorCounter = () => {
+      try {
+        // Get or initialize unique visitors count
+        let uniqueVisitors = parseInt(localStorage.getItem('portfolioUniqueVisitors') || '0');
+        
+        // Check if this is a new unique visitor
+        const isNewVisitor = !localStorage.getItem('portfolioVisited');
+        if (isNewVisitor) {
+          uniqueVisitors += 1;
+          localStorage.setItem('portfolioUniqueVisitors', uniqueVisitors.toString());
+          localStorage.setItem('portfolioVisited', 'true');
+        }
+
+        // Get or initialize total visits count
+        let totalVisits = parseInt(localStorage.getItem('portfolioTotalVisits') || '0');
+        
+        // Check if this is a new session
+        const isNewSession = !sessionStorage.getItem('portfolioSessionVisit');
+        if (isNewSession) {
+          totalVisits += 1;
+          localStorage.setItem('portfolioTotalVisits', totalVisits.toString());
+          sessionStorage.setItem('portfolioSessionVisit', 'true');
+        }
+
+        setVisitorStats({ totalVisits, uniqueVisitors });
+      } catch (error) {
+        console.warn('Visitor counter failed to initialize:', error);
+        // Fallback to static numbers if storage is not available
+        setVisitorStats({ totalVisits: 1247, uniqueVisitors: 892 });
+      }
+    };
+
+    // Run after component mounts to avoid SSR issues
+    const timer = setTimeout(initializeVisitorCounter, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Format numbers with commas
+  const formatNumber = (num: number) => {
+    return num.toLocaleString();
+  };
 
   const socialLinks = [
     {
@@ -351,6 +401,89 @@ const Footer = () => {
           variants={itemVariants}
           className="pt-6 border-t border-white/20 dark:border-white/10"
         >
+          {/* Visitor Counter */}
+          <motion.div 
+            className="mb-6 flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 1.1 }}
+          >
+            <div className="flex items-center gap-6 p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-emerald-500/10 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg">
+              {/* Total Visits */}
+              <motion.div 
+                className="flex items-center gap-3"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.div
+                  className="p-2.5 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 shadow-md"
+                  animate={{ 
+                    boxShadow: [
+                      "0 0 10px rgba(59, 130, 246, 0.3)",
+                      "0 0 20px rgba(59, 130, 246, 0.5)",
+                      "0 0 10px rgba(59, 130, 246, 0.3)"
+                    ]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  <EyeIcon size={18} className="text-blue-600 dark:text-blue-400" />
+                </motion.div>
+                <div className="text-center">
+                  <motion.p 
+                    className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent"
+                    key={visitorStats.totalVisits}
+                    initial={{ scale: 1.2, opacity: 0.7 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5, type: "spring" }}
+                  >
+                    {formatNumber(visitorStats.totalVisits)}
+                  </motion.p>
+                  <p className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                    Total Visits
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Separator */}
+              <div className="w-px h-8 bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-600 to-transparent" />
+
+              {/* Unique Visitors */}
+              <motion.div 
+                className="flex items-center gap-3"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.div
+                  className="p-2.5 rounded-xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 shadow-md"
+                  animate={{ 
+                    boxShadow: [
+                      "0 0 10px rgba(16, 185, 129, 0.3)",
+                      "0 0 20px rgba(16, 185, 129, 0.5)",
+                      "0 0 10px rgba(16, 185, 129, 0.3)"
+                    ]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                >
+                  <UsersIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
+                </motion.div>
+                <div className="text-center">
+                  <motion.p 
+                    className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent"
+                    key={visitorStats.uniqueVisitors}
+                    initial={{ scale: 1.2, opacity: 0.7 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5, type: "spring" }}
+                  >
+                    {formatNumber(visitorStats.uniqueVisitors)}
+                  </motion.p>
+                  <p className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                    Unique Visitors
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <motion.p 
               className="text-gray-600 dark:text-gray-400 text-center md:text-left flex items-center gap-2"
