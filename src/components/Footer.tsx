@@ -171,7 +171,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-emerald-400 bg-clip-text text-transparent">
-              Let's Connect
+              Let&apos;s Connect
             </span>
           </motion.h2>
           <motion.p
@@ -180,7 +180,7 @@ const Footer = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Ready to bring your ideas to life? Let's create something amazing together.
+            Ready to bring your ideas to life? Let&apos;s create something amazing together.
           </motion.p>
         </motion.div>
 

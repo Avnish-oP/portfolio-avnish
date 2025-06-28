@@ -170,7 +170,7 @@ const ModernContact = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Let's collaborate and bring your ideas to life. I'm always excited to work on new projects and challenges.
+            Let&apos;s collaborate and bring your ideas to life. I&apos;m always excited to work on new projects and challenges.
           </motion.p>
         </motion.div>
 
@@ -184,10 +184,10 @@ const ModernContact = () => {
           <motion.div variants={itemVariants} className="space-y-8">
             <div>
               <h3 className="text-3xl font-bold text-white mb-8">
-                Let's Start a Conversation
+                Let&apos;s Start a Conversation
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                I'm always open to discussing new opportunities, creative projects, 
+                I&apos;m always open to discussing new opportunities, creative projects, 
                 or potential collaborations. Feel free to reach out through any of 
                 the channels below.
               </p>

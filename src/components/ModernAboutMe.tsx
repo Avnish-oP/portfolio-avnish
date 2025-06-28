@@ -156,7 +156,7 @@ const ModernAboutMe = () => {
                 className="space-y-6 text-gray-300 text-lg leading-relaxed"
               >
                 <p>
-                  I'm a passionate full-stack developer with a love for creating 
+                  I&apos;m a passionate full-stack developer with a love for creating 
                   innovative web solutions. My journey in programming started with 
                   curiosity and has evolved into a career focused on building 
                   exceptional digital experiences.
@@ -170,7 +170,7 @@ const ModernAboutMe = () => {
                 </p>
 
                 <p>
-                  When I'm not coding, you'll find me exploring new technologies, 
+                  When I&apos;m not coding, you&apos;ll find me exploring new technologies, 
                   contributing to open-source projects, or sharing knowledge with 
                   the developer community.
                 </p>

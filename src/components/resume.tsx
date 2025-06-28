@@ -167,7 +167,7 @@ const Resume = () => {
                 <h3 className="text-xl font-semibold text-white">React.js Developer</h3>
                 <p className="text-emerald-400 font-medium">IOSC, Usar | Sept 2023 - Feb 2024</p>
                 <ul className="list-disc pl-6 mt-3 space-y-2 text-gray-300">
-                  <li>Contributed to the development of the college's food ordering app using React.js.</li>
+                  <li>Contributed to the development of the college&apos;s food ordering app using React.js.</li>
                   <li>Implemented advanced search functionalities including fuzzy matching and category filters.</li>
                   <li>Developed cart management features, optimizing the checkout process with real-time subtotal calculations.</li>
                 </ul>

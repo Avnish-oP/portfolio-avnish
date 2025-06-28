@@ -244,7 +244,7 @@ const Hero: React.FC = () => {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.7 }}
                 >
-                  Hello, I'm
+                  Hello, I&apos;m
                 </motion.span>
               </motion.div>
               
@@ -374,7 +374,7 @@ const Hero: React.FC = () => {
                   <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-600 to-blue-600 rounded-2xl blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
                   
                   <span className="relative z-10 flex items-center gap-3">
-                    Let's Connect
+                    Let&apos;s Connect
                     <motion.svg 
                       className="w-6 h-6" 
                       fill="none" 
