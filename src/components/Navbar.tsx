@@ -98,10 +98,10 @@ function Navbar() {
         ease: "easeInOut"
       }}
     >
-      {/* Enhanced glassmorphism background with multiple layers - theme aware */}
-      <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/70 to-white/80 dark:from-slate-950/80 dark:via-slate-900/70 dark:to-slate-950/80 backdrop-blur-2xl" />
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-transparent to-purple-500/5" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent" />
+      {/* Enhanced glassmorphism background with multiple layers - light mode optimized */}
+      <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/85 to-white/90 dark:from-slate-950/80 dark:via-slate-900/70 dark:to-slate-950/80 backdrop-blur-2xl" />
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-400/8 via-transparent to-purple-400/8 dark:from-blue-500/5 dark:via-transparent dark:to-purple-500/5" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300/40 dark:via-blue-400/30 to-transparent" />
       
       <div className="relative flex justify-between items-center px-6 py-4">
         {/* Enhanced Logo */}
@@ -134,7 +134,7 @@ function Navbar() {
         <div className="lg:hidden">
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="relative p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none rounded-lg glass-card"
+            className="relative p-2 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white focus:outline-none rounded-lg glass-card"
             whileTap={{ scale: 0.95 }}
           >
             <AnimatePresence mode="wait">
@@ -173,7 +173,7 @@ function Navbar() {
                 className={`relative px-4 py-2 text-lg font-medium transition-all duration-300 rounded-lg ${
                   activeTab === tab
                     ? "text-blue-600 dark:text-blue-400"
-                    : "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                    : "text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
                 <motion.span

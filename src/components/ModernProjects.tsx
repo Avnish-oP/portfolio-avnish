@@ -12,63 +12,67 @@ const ModernProjects = () => {
     amount: 0.2,
     margin: "100px"
   });
-  const [activeProject, setActiveProject] = useState<number | null>(null);
 
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce platform built with Next.js, featuring real-time inventory management, secure payments, and admin dashboard.",
-      image: "/images/academy app1.png",
-      tags: ["Next.js", "TypeScript", "MongoDB", "Stripe", "Tailwind CSS"],
+      title: "Multi-Site Product Search Engine",
+      description: "A backend-heavy project that automates product searches across multiple e-commerce websites using web crawlers",
+      image: "/images/sih.png",
+      tags: ["Next.js", "TypeScript", "MongoDB", "Python", "Tailwind CSS","Express.js"],
       liveUrl: "https://ecommerce-demo.com",
-      githubUrl: "https://github.com/yourusername/ecommerce",
+      githubUrl: "https://github.com/Avnish-oP/sih-backend",
       featured: true,
-      color: "#3B82F6"
+      color: "#3B82F6",
+      date: "2024-12-15"
     },
     {
       id: 2,
-      title: "AI Chat Application",
-      description: "Real-time chat application with AI-powered responses, built using React, Socket.io, and OpenAI API integration.",
+      title: "OpinionZ",
+      description: "A social platform where opinions meet facts—share, debate, and discover truth-checked perspectives.",
       image: "/images/opinionZ-1.png",
-      tags: ["React", "Node.js", "Socket.io", "OpenAI", "Redis"],
+      tags: ["React", "GoLang", "MongoDb", "OpenAI", "Redis"],
       liveUrl: "https://ai-chat-demo.com",
-      githubUrl: "https://github.com/yourusername/ai-chat",
+      githubUrl: "https://github.com/Avnish-oP/opinionz-go",
       featured: true,
-      color: "#8B5CF6"
+      color: "#8B5CF6",
+      date: "2024-11-20"
     },
     {
       id: 3,
-      title: "Task Management System",
-      description: "Collaborative task management platform with drag-and-drop functionality, team collaboration, and progress tracking.",
-      image: "/images/auth.com.png",
-      tags: ["React", "Express.js", "PostgreSQL", "WebSockets"],
-      liveUrl: "https://taskmanager-demo.com",
-      githubUrl: "https://github.com/yourusername/taskmanager",
+      title: "Smart Delhi Ideathon 2025 - Portal",
+      description: "Freelance project where i developed portal for Smart Delhi Ideathon 2025",
+      image: "/images/sdi.png",
+      tags: ["Nextjs", "Tailwind", "PostgreSQL", "Zod"],
+      liveUrl: "https://www.sdi2025.in/",
+      githubUrl: "https://github.com/Avnish-oP/sdi2025-website",
       featured: false,
-      color: "#10B981"
+      color: "#10B981",
+      date: "2025-01-10"
     },
     {
       id: 4,
-      title: "Data Visualization Dashboard",
-      description: "Interactive dashboard for data visualization with real-time updates, charts, and analytics for business intelligence.",
-      image: "/images/portfolioDp.jpeg",
-      tags: ["React", "D3.js", "Python", "FastAPI", "PostgreSQL"],
-      liveUrl: "https://dashboard-demo.com",
-      githubUrl: "https://github.com/yourusername/dashboard",
+      title: "Indiana Merchandise - Freelance Project",
+      description: "Portfolio website for Indiana Merchandise, showcasing products and services with a modern design.",
+      image: "/images/indiana.png",
+      tags: ["React", "Next.js", "Tailwind", "Email"],
+      liveUrl: "https://indiana-website.vercel.app/",
+      githubUrl: "https://github.com/Avnish-oP/indiana-website",
       featured: false,
-      color: "#F59E0B"
+      color: "#F59E0B",
+      date: "2024-10-05"
     },
     {
       id: 5,
-      title: "Social Media Platform",
-      description: "A modern social media platform with real-time messaging, story features, and content sharing capabilities.",
-      image: "/images/portolioPhoto.png",
-      tags: ["Next.js", "GraphQL", "MongoDB", "AWS S3", "WebRTC"],
-      liveUrl: "https://social-demo.com",
-      githubUrl: "https://github.com/yourusername/social",
+      title: "JAM Base – Real-Time Music Party Platform",
+      description: "JAM Base lets users create music sessions, add songs to a shared queue, listen together in real-time, and boost their songs higher in the queue by paying.",
+      image: "/images/jambase.png",
+      tags: ["Next.js", "Socket.Io", "PostgreSQL", "Express", "Stripe"],
+      liveUrl: "#",
+      githubUrl: "#",
       featured: true,
-      color: "#EF4444"
+      color: "#EF4444",
+      date: "2024-09-15"
     },
     {
       id: 6,
@@ -79,9 +83,14 @@ const ModernProjects = () => {
       liveUrl: "https://fitness-demo.com",
       githubUrl: "https://github.com/yourusername/fitness",
       featured: false,
-      color: "#06B6D4"
+      color: "#06B6D4",
+      date: "2024-08-20"
     }
   ];
+
+  // Sort projects by date (most recent first) and take only the first 3 for home page
+  const sortedProjects = projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const displayProjects = sortedProjects.slice(0, 4);
 
   const containerVariants = React.useMemo(() => ({
     hidden: { opacity: 0 },
@@ -116,12 +125,11 @@ const ModernProjects = () => {
     const handleMouseLeave = React.useCallback(() => {
       x.set(0);
       y.set(0);
-      setActiveProject(null);
     }, [x, y]);
 
     const handleMouseEnter = React.useCallback(() => {
-      setActiveProject(project.id);
-    }, [project.id]);
+      // Removed state update for better performance
+    }, []);
 
     const cardVariants = {
       hidden: { 
@@ -185,7 +193,7 @@ const ModernProjects = () => {
 
           {/* Content */}
           <div className="relative z-10 h-full flex flex-col justify-between p-6">
-            {/* Featured badge */}
+            {/* Featured badge - positioned at top */}
             {project.featured && (
               <motion.div
                 className="self-end"
@@ -202,10 +210,13 @@ const ModernProjects = () => {
               </motion.div>
             )}
 
-            {/* Main content */}
+            {/* Spacer for non-featured cards to push content to bottom */}
+            {!project.featured && <div></div>}
+
+            {/* Main content - always at bottom */}
             <div className="space-y-4">
               <motion.h3
-                className="text-2xl lg:text-3xl font-bold text-white"
+                className="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white"
                 initial={{ y: 20, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: index * 0.1 + 0.3 }}
@@ -214,7 +225,7 @@ const ModernProjects = () => {
               </motion.h3>
 
               <motion.p
-                className="text-gray-300 text-sm lg:text-base leading-relaxed"
+                className="text-slate-700 dark:text-gray-300 text-sm lg:text-base leading-relaxed"
                 initial={{ y: 20, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: index * 0.1 + 0.4 }}
@@ -271,33 +282,32 @@ const ModernProjects = () => {
             </div>
           </div>
 
-          {/* Floating particles on hover */}
-          {activeProject === project.id && (
-            <>
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 rounded-full"
-                  style={{ backgroundColor: project.color }}
-                  initial={{
-                    x: Math.random() * 300,
-                    y: Math.random() * 200,
-                    opacity: 0
-                  }}
-                  animate={{
-                    x: Math.random() * 300,
-                    y: Math.random() * 200,
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: i * 0.2
-                  }}
-                />
-              ))}
-            </>
-          )}
+          {/* Floating particles on hover - using group-hover for better performance */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 rounded-full"
+                style={{ 
+                  backgroundColor: project.color,
+                  left: `${10 + i * 10}%`,
+                  top: `${20 + (i % 3) * 20}%`
+                }}
+                animate={{
+                  x: [0, 15, -15, 0],
+                  y: [0, -15, 15, 0],
+                  opacity: [0.2, 1, 0.2],
+                  scale: [0.5, 1.2, 0.5]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
+          </div>
         </motion.div>
       </motion.div>
     );
@@ -307,17 +317,17 @@ const ModernProjects = () => {
 
   return (
     <section ref={ref} className="relative min-h-screen py-20 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
-        {/* Animated shapes */}
+      {/* Background - light mode optimized */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/40 to-purple-50/30 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950">
+        {/* Animated shapes - light mode optimized */}
         <div className="absolute inset-0">
           <motion.div
-            className="absolute top-20 left-10 w-32 h-32 border border-blue-500/20 rounded-full"
+            className="absolute top-20 left-10 w-32 h-32 border border-blue-400/30 dark:border-blue-500/20 rounded-full"
             animate={{ rotate: 360, scale: [1, 1.2, 1] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           />
           <motion.div
-            className="absolute bottom-20 right-20 w-24 h-24 bg-purple-500/10 rounded-lg"
+            className="absolute bottom-20 right-20 w-24 h-24 bg-purple-400/15 dark:bg-purple-500/10 rounded-lg"
             animate={{ rotate: -360, scale: [1, 1.1, 1] }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           />
@@ -339,17 +349,17 @@ const ModernProjects = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-emerald-400 bg-clip-text text-transparent">
-              Featured Projects
+              Recent Projects
             </span>
           </motion.h2>
           
           <motion.p
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            className="text-xl text-slate-600 dark:text-gray-300 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            A showcase of my recent work, featuring full-stack applications and creative solutions
+            Here are my latest projects showcasing modern web development and innovative solutions
           </motion.p>
         </motion.div>
 
@@ -360,7 +370,7 @@ const ModernProjects = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project, index) => (
+          {displayProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </motion.div>

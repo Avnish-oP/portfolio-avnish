@@ -48,25 +48,25 @@ const ModernAboutMe = () => {
 
   return (
     <section ref={ref} className="relative min-h-screen py-20 overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950">
+      {/* Animated background - light mode optimized */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/50 to-purple-50/30 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950">
         <div className="absolute inset-0">
-          {/* Floating geometric shapes */}
+          {/* Floating geometric shapes - light mode optimized */}
           <motion.div
             style={{ y }}
-            className="absolute top-20 left-10 w-20 h-20 border border-blue-500/30 rotate-45"
+            className="absolute top-20 left-10 w-20 h-20 border border-blue-400/40 dark:border-blue-500/30 rotate-45"
             animate={{ rotate: [0, 360] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           />
           <motion.div
             style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 150]) }}
-            className="absolute top-40 right-20 w-16 h-16 bg-purple-500/20 rounded-full"
+            className="absolute top-40 right-20 w-16 h-16 bg-purple-400/25 dark:bg-purple-500/20 rounded-full"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 4, repeat: Infinity }}
           />
           <motion.div
             style={{ y: useTransform(scrollYProgress, [0, 1], [80, -80]) }}
-            className="absolute bottom-40 left-1/4 w-12 h-12 border-2 border-emerald-400/40 rounded-full"
+            className="absolute bottom-40 left-1/4 w-12 h-12 border-2 border-emerald-400/50 dark:border-emerald-400/40 rounded-full"
           />
         </div>
       </div>
@@ -160,7 +160,7 @@ const ModernAboutMe = () => {
               
               <motion.div
                 variants={itemVariants}
-                className="space-y-6 text-gray-300 text-lg leading-relaxed"
+                className="space-y-6 text-slate-700 dark:text-gray-300 text-lg leading-relaxed"
               >
                 <p>
                   I&apos;m a passionate full-stack developer with a love for creating 

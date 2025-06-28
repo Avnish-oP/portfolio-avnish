@@ -199,7 +199,7 @@ const ModernContact = () => {
                 <motion.a
                   key={info.label}
                   href={info.href}
-                  className="flex items-center p-6 bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl group hover:border-gray-600/50 transition-all duration-300"
+                  className="flex items-center p-6 bg-gradient-to-r from-white/70 via-blue-50/50 to-white/70 dark:from-gray-900/50 dark:to-black/50 backdrop-blur-sm border border-slate-200/50 dark:border-gray-700/50 rounded-2xl group hover:border-blue-300/50 dark:hover:border-gray-600/50 transition-all duration-300"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02, y: -2 }}
                   transition={{ type: "spring", stiffness: 300 }}
@@ -228,7 +228,7 @@ const ModernContact = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-4 bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-700/50 rounded-xl hover:border-gray-600/50 transition-all duration-300"
+                    className="p-4 bg-gradient-to-r from-white/70 via-blue-50/50 to-white/70 dark:from-gray-900/50 dark:to-black/50 backdrop-blur-sm border border-slate-200/50 dark:border-gray-700/50 rounded-xl hover:border-blue-300/50 dark:hover:border-gray-600/50 transition-all duration-300"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -241,7 +241,7 @@ const ModernContact = () => {
 
           {/* Contact Form */}
           <motion.div variants={itemVariants}>
-            <div className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-8">
+            <div className="bg-gradient-to-br from-white/80 via-blue-50/60 to-white/80 dark:from-gray-900/50 dark:to-black/50 backdrop-blur-sm border border-slate-200/50 dark:border-gray-700/50 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">

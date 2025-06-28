@@ -34,9 +34,9 @@ const Hero: React.FC = () => {
     { text: "I'm " },
     { text: "a" },
     { text: " full-stack " },
-    { text: "developer", className: "text-emerald-500 dark:text-emerald-400" },
+    { text: "developer", className: "text-emerald-600 dark:text-emerald-400" },
     { text: "and" },
-    { text: "programmer.", className: "text-blue-500 dark:text-blue-400" },
+    { text: "programmer.", className: "text-blue-700 dark:text-blue-400" },
   ];
 
   // Mouse movement effect
@@ -69,40 +69,40 @@ const Hero: React.FC = () => {
       style={{ y: smoothY, scale: smoothScale, opacity }}
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden"
     >
-      {/* Enhanced dynamic background with multiple layers */}
+      {/* Enhanced dynamic background with multiple layers - optimized for light mode */}
       <div className="absolute inset-0">
-        {/* Base gradient with improved colors - theme aware */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100 dark:from-slate-950 dark:via-indigo-950/80 dark:to-slate-950" />
+        {/* Base gradient with improved light mode colors */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20 dark:from-slate-950 dark:via-indigo-950/80 dark:to-slate-950" />
         
-        {/* Mouse-following gradient with enhanced effects */}
+        {/* Mouse-following gradient with enhanced light mode effects */}
         <div 
-          className="absolute inset-0 opacity-70"
+          className="absolute inset-0 opacity-40 dark:opacity-70"
           style={{
             background: `radial-gradient(800px circle at ${mousePosition.x}% ${mousePosition.y}%, 
-              rgba(99, 102, 241, 0.4) 0%, 
-              rgba(168, 85, 247, 0.25) 20%, 
-              rgba(59, 130, 246, 0.15) 40%, 
-              rgba(16, 185, 129, 0.1) 60%,
+              rgba(37, 99, 235, 0.2) 0%, 
+              rgba(129, 80, 246, 0.15) 20%, 
+              rgba(59, 130, 246, 0.1) 40%, 
+              rgba(16, 185, 129, 0.08) 60%,
               transparent 80%)`
           }}
         />
         
-        {/* Enhanced animated mesh gradients */}
+        {/* Enhanced animated mesh gradients - light mode optimized */}
         <motion.div
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 opacity-20 dark:opacity-40"
           animate={{
             background: [
-              "radial-gradient(ellipse at 20% 80%, rgba(120, 119, 198, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(255, 119, 198, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 40% 40%, rgba(16, 185, 129, 0.3) 0%, transparent 50%)",
-              "radial-gradient(ellipse at 40% 40%, rgba(120, 119, 198, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 60% 60%, rgba(255, 119, 198, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.3) 0%, transparent 50%)",
-              "radial-gradient(ellipse at 20% 80%, rgba(120, 119, 198, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(255, 119, 198, 0.4) 0%, transparent 50%), radial-gradient(ellipse at 40% 40%, rgba(16, 185, 129, 0.3) 0%, transparent 50%)"
+              "radial-gradient(ellipse at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(129, 80, 246, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 40% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 40% 40%, rgba(37, 99, 235, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 60% 60%, rgba(129, 80, 246, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%)",
+              "radial-gradient(ellipse at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(129, 80, 246, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 40% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 50%)"
             ]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         
-        {/* Additional animated orbs */}
+        {/* Additional animated orbs - light mode optimized */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-blue-400/15 to-purple-400/15 dark:from-blue-500/20 dark:to-purple-500/20 blur-3xl"
           animate={{
             x: [0, 100, 0],
             y: [0, -50, 0],
@@ -111,7 +111,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-gradient-to-r from-emerald-500/20 to-blue-500/20 blur-3xl"
+          className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-gradient-to-r from-emerald-400/15 to-blue-400/15 dark:from-emerald-500/20 dark:to-blue-500/20 blur-3xl"
           animate={{
             x: [0, -80, 0],
             y: [0, 60, 0],
@@ -220,7 +220,7 @@ const Hero: React.FC = () => {
               className="space-y-6"
             >
               <motion.div 
-                className="text-lg lg:text-xl text-blue-600 dark:text-blue-300 font-medium tracking-wide mt-10"
+                className="text-lg lg:text-xl text-blue-700 dark:text-blue-300 font-medium tracking-wide mt-10"
                 initial={{ opacity: 0, x: -30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -316,7 +316,7 @@ const Hero: React.FC = () => {
 
             {/* Enhanced description with letter-by-letter animation */}
             <motion.div
-              className="text-xl lg:text-2xl text-center lg:text-left font-normal text-gray-600 dark:text-gray-300 max-w-3xl leading-relaxed"
+              className="text-xl lg:text-2xl text-center lg:text-left font-normal text-slate-700 dark:text-gray-300 max-w-3xl leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 2 }}

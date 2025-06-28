@@ -91,7 +91,7 @@ const Footer = () => {
       icon: InstagramIcon,
       color: "#E4405F",
       gradient: "from-[#833AB4] via-[#E4405F] to-[#F77737]",
-      hoverGradient: "hover:from-[#9146FF] hover:via-[#E4405F] hover:to-[#FFDC80]",
+      hoverGradient: "hover:from-[#9146FF] hover:via-[#E4405F] hover:to-[#F77737]",
     }
   ];
 
@@ -185,18 +185,18 @@ const Footer = () => {
       {/* Smaller floating orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute top-10 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl"
+          className="absolute top-10 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-blue-400/15 to-purple-400/15 dark:from-blue-500/20 dark:to-purple-500/20 blur-3xl"
           variants={glowVariants}
           animate="animate"
         />
         <motion.div
-          className="absolute top-20 right-16 w-24 h-24 rounded-full bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 blur-3xl"
+          className="absolute top-20 right-16 w-24 h-24 rounded-full bg-gradient-to-r from-emerald-400/15 to-cyan-400/15 dark:from-emerald-500/20 dark:to-cyan-500/20 blur-3xl"
           variants={glowVariants}
           animate="animate"
           transition={{ delay: 1 }}
         />
         <motion.div
-          className="absolute bottom-16 left-1/3 w-28 h-28 rounded-full bg-gradient-to-r from-pink-500/20 to-orange-500/20 blur-3xl"
+          className="absolute bottom-16 left-1/3 w-28 h-28 rounded-full bg-gradient-to-r from-purple-400/15 to-blue-400/15 dark:from-purple-500/20 dark:to-blue-500/20 blur-3xl"
           variants={glowVariants}
           animate="animate"
           transition={{ delay: 2 }}
@@ -408,7 +408,7 @@ const Footer = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 1.1 }}
           >
-            <div className="flex items-center gap-6 p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-emerald-500/10 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg">
+            <div className="flex items-center gap-6 p-4 rounded-2xl bg-gradient-to-r from-blue-400/8 via-purple-400/8 to-emerald-400/8 dark:from-blue-500/10 dark:via-purple-500/10 dark:to-emerald-500/10 backdrop-blur-xl border border-slate-200/40 dark:border-white/10 shadow-lg">
               {/* Total Visits */}
               <motion.div 
                 className="flex items-center gap-3"
@@ -510,7 +510,7 @@ const Footer = () => {
             {/* Compact Scroll to Top Button */}
             <motion.button
               onClick={scrollToTop}
-              className="group flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-xl border border-white/20 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-md hover:shadow-lg"
+              className="group flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-400/15 to-purple-400/15 dark:from-blue-500/20 dark:to-purple-500/20 backdrop-blur-xl border border-slate-200/40 dark:border-white/20 hover:from-blue-400/25 hover:to-purple-400/25 dark:hover:from-blue-500/30 dark:hover:to-purple-500/30 transition-all duration-300 shadow-md hover:shadow-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.4 }}

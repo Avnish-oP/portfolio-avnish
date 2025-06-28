@@ -15,7 +15,6 @@ const ModernSkills = () => {
     amount: 0.2,
     margin: "100px"
   });
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   // Prevent re-renders by stabilizing animation trigger
   React.useEffect(() => {
@@ -167,12 +166,7 @@ const ModernSkills = () => {
     const handleMouseLeave = React.useCallback(() => {
       x.set(0);
       y.set(0);
-      setHoveredSkill(null);
     }, [x, y]);
-
-    const handleMouseEnter = React.useCallback(() => {
-      setHoveredSkill(skill.name);
-    }, [skill.name]);
 
     return (
       <motion.div
@@ -184,10 +178,9 @@ const ModernSkills = () => {
         }}
         onMouseMove={handleMouse}
         onMouseLeave={handleMouseLeave}
-        onMouseEnter={handleMouseEnter}
       >
         <motion.div
-          className="relative w-full h-48 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 overflow-hidden"
+          className="relative w-full h-48 bg-gradient-to-br from-white/80 via-blue-50/60 to-white/80 dark:from-gray-900/50 dark:to-black/50 backdrop-blur-sm border border-slate-200/50 dark:border-gray-700/50 rounded-2xl p-6 overflow-hidden"
           style={{
             rotateX,
             rotateY,
@@ -243,7 +236,7 @@ const ModernSkills = () => {
             </div>
 
             <div>
-              <h3 className="text-white text-lg font-semibold mb-3">
+              <h3 className="text-slate-900 dark:text-white text-lg font-semibold mb-3">
                 {skill.name}
               </h3>
               
@@ -273,33 +266,32 @@ const ModernSkills = () => {
             </div>
           </div>
 
-          {/* Floating particles */}
-          {hoveredSkill === skill.name && (
-            <>
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 rounded-full"
-                  style={{ backgroundColor: skill.color }}
-                  initial={{
-                    x: Math.random() * 200,
-                    y: Math.random() * 150,
-                    opacity: 0
-                  }}
-                  animate={{
-                    x: Math.random() * 200,
-                    y: Math.random() * 150,
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.2
-                  }}
-                />
-              ))}
-            </>
-          )}
+          {/* Floating particles - using group-hover for better performance */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 rounded-full"
+                style={{ 
+                  backgroundColor: skill.color,
+                  left: `${20 + i * 15}%`,
+                  top: `${30 + i * 10}%`
+                }}
+                animate={{
+                  x: [0, 10, -10, 0],
+                  y: [0, -10, 10, 0],
+                  opacity: [0.3, 1, 0.3],
+                  scale: [0.8, 1.2, 0.8]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
+          </div>
         </motion.div>
       </motion.div>
     );
@@ -309,8 +301,8 @@ const ModernSkills = () => {
 
   return (
     <section ref={ref} className="relative min-h-screen py-20 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
+      {/* Background - light mode optimized */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/40 to-purple-50/30 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950">
         {/* Animated grid pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" 
@@ -373,7 +365,7 @@ const ModernSkills = () => {
           animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          <h3 className="text-2xl font-semibold text-white mb-6">
+          <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
             Technology Categories
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
