@@ -117,11 +117,11 @@ const ModernProjects = () => {
       x.set(0);
       y.set(0);
       setActiveProject(null);
-    }, [x, y, setActiveProject]);
+    }, [x, y]);
 
     const handleMouseEnter = React.useCallback(() => {
       setActiveProject(project.id);
-    }, [project.id, setActiveProject]);
+    }, [project.id]);
 
     const cardVariants = {
       hidden: { 
@@ -302,6 +302,8 @@ const ModernProjects = () => {
       </motion.div>
     );
   });
+
+  ProjectCard.displayName = 'ProjectCard';
 
   return (
     <section ref={ref} className="relative min-h-screen py-20 overflow-hidden">

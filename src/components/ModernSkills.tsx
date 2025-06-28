@@ -24,7 +24,7 @@ const ModernSkills = () => {
     }
   }, [isInView, hasAnimated]);
 
-  const skills = [
+  const skills = React.useMemo(() => [
     {
       name: "React.js",
       icon: SiReact,
@@ -109,11 +109,11 @@ const ModernSkills = () => {
       level: 90,
       category: "Styling"
     }
-  ];
+  ], []);
 
   const categories = React.useMemo(() => 
     Array.from(new Set(skills.map(skill => skill.category))), 
-    []
+    [skills]
   );
 
   const containerVariants = React.useMemo(() => ({
@@ -168,11 +168,11 @@ const ModernSkills = () => {
       x.set(0);
       y.set(0);
       setHoveredSkill(null);
-    }, [x, y, setHoveredSkill]);
+    }, [x, y]);
 
     const handleMouseEnter = React.useCallback(() => {
       setHoveredSkill(skill.name);
-    }, [skill.name, setHoveredSkill]);
+    }, [skill.name]);
 
     return (
       <motion.div
@@ -304,6 +304,8 @@ const ModernSkills = () => {
       </motion.div>
     );
   });
+
+  SkillCard.displayName = 'SkillCard';
 
   return (
     <section ref={ref} className="relative min-h-screen py-20 overflow-hidden">

@@ -27,20 +27,20 @@ function Navbar() {
   const [isHidden, setIsHidden] = useState(false);
 
   // Get active tab based on current pathname
-  const getActiveTab = () => {
+  const getActiveTab = React.useCallback(() => {
     if (pathname === "/") return "home";
     if (pathname === "/resume") return "resume";
     if (pathname === "/projects") return "projects";
     if (pathname === "/contact") return "contact";
     return "home";
-  };
+  }, [pathname]);
 
   const [activeTab, setActiveTab] = useState(getActiveTab());
 
   // Update active tab when pathname changes
   useEffect(() => {
     setActiveTab(getActiveTab());
-  }, [pathname]);
+  }, [pathname, getActiveTab]);
 
   const handleTabChange = (tabName: string) => {
     setActiveTab(tabName);
