@@ -477,7 +477,7 @@ const Hero: React.FC = () => {
 
             {/* Enhanced profile image container with better glassmorphism */}
             <motion.div 
-              className="relative z-10 rounded-full p-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 shadow-2xl"
+              className="relative  z-10 rounded-full p-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 shadow-2xl"
               whileHover={{ scale: 1.05, rotate: 2 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -547,7 +547,7 @@ const Hero: React.FC = () => {
 
         {/* Enhanced mobile image with similar frame effects */}
         <motion.div 
-          className="lg:hidden relative z-10 flex flex-col items-center mb-8"
+          className="lg:hidden relative z-10 flex flex-col items-center mb-12"
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.7 }}
@@ -640,7 +640,7 @@ const Hero: React.FC = () => {
 
         {/* Social Media - Enhanced */}
         <motion.div 
-          className="absolute bottom-8 left-0 right-0 flex justify-center"
+          className="absolute mt-20 z-50 md:mt-0  w-full bottom-8 left-0 right-0 flex justify-center"
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 1 }}
