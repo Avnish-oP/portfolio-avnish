@@ -1,12 +1,13 @@
-import Resume from '@/components/resume'
-import React from 'react'
+"use client";
+import React from "react";
+import Resume from '@/components/resume';
 
-function page() {
+const ResumePage = () => {
   return (
-    <div>
-      <Resume/>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950/80 to-slate-950">
+      <Resume />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default ResumePage;
