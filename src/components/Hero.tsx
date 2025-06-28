@@ -477,7 +477,7 @@ const Hero: React.FC = () => {
 
             {/* Enhanced profile image container with better glassmorphism */}
             <motion.div 
-              className="relative  z-10 rounded-full p-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 shadow-2xl"
+              className="relative  z-10 rounded-full p-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 shadow-2xl mt-8"
               whileHover={{ scale: 1.05, rotate: 2 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -493,20 +493,23 @@ const Hero: React.FC = () => {
                 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Inner image container */}
+                {/* Inner image container with theme-aware background */}
                 <motion.div
-                  className="relative rounded-full overflow-hidden bg-gradient-to-br from-gray-900 via-slate-800 to-black p-0.5"
+                  className="relative rounded-full overflow-hidden bg-gradient-to-br from-white/90 via-blue-50/80 to-white/90 dark:from-slate-800/90 dark:via-slate-700/80 dark:to-slate-800/90 backdrop-blur-xl border border-white/20 dark:border-white/10 p-1"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
                   {/* Profile image */}
-                  <motion.div className="relative rounded-full overflow-hidden">
+                  <motion.div className="relative rounded-full overflow-hidden bg-gradient-to-br from-white/50 to-white/20 dark:from-slate-700/50 dark:to-slate-800/20 backdrop-blur-sm">
                     <Image
                       src="/images/dp.png"
                       alt="Hero Image"
-                      width={350}
-                      height={350}
+                      width={200}
+                      height={200}
                       className="rounded-full w-full h-full object-cover"
+                      style={{
+                        background: 'transparent'
+                      }}
                     />
                     
                     {/* Hover overlay with subtle gradient */}
@@ -584,22 +587,25 @@ const Hero: React.FC = () => {
               {/* Mobile outer glow */}
               <div className="absolute -inset-3 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-emerald-500/30 rounded-full blur-lg opacity-60" />
               
-              {/* Mobile glassmorphism frame */}
+              {/* Mobile glassmorphism frame with theme-aware background */}
               <motion.div 
-                className="relative rounded-full overflow-hidden bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-xl border border-white/30 p-1.5 shadow-inner"
+                className="relative rounded-full overflow-hidden bg-gradient-to-br from-white/90 via-blue-50/80 to-white/90 dark:from-slate-800/90 dark:via-slate-700/80 dark:to-slate-800/90 backdrop-blur-xl border border-white/30 dark:border-white/10 p-2 shadow-inner"
                 whileHover={{ 
                   boxShadow: "0 20px 40px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)",
                   borderColor: "rgba(255,255,255,0.4)"
                 }}
               >
-                <div className="rounded-full overflow-hidden bg-gradient-to-br from-gray-900 to-black p-0.5">
+                <div className="rounded-full overflow-hidden bg-gradient-to-br from-white/50 to-white/20 dark:from-slate-700/50 dark:to-slate-800/20 backdrop-blur-sm p-0.5">
                   <motion.div className="relative rounded-full overflow-hidden">
                     <Image
                       src="/images/dp.png"
                       alt="Hero Image"
-                      width={250}
-                      height={250}
+                      width={200}
+                      height={200}
                       className="rounded-full w-full h-full object-cover"
+                      style={{
+                        background: 'transparent'
+                      }}
                     />
                     
                     {/* Mobile hover overlay */}

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Avnish's Portfolio",
   description: "This is portfolio website of Avnish, where you can find his projects, blogs and resume.",
   icons:{
-    icon: "../../public/porfolio-icon.jpeg",
+    icon: "../../public/dp.png",
   },
 };
 
