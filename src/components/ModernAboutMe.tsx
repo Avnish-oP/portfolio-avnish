@@ -1,251 +1,187 @@
 "use client";
-"use client";
 import React, { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { FaTerminal, FaCode, FaServer, FaDatabase, FaReact, FaNodeJs, FaAws, FaDocker } from "react-icons/fa";
+import { SiTypescript, SiNextdotjs, SiMongodb, SiPostgresql, SiGraphql, SiPython, SiGo, SiExpress } from "react-icons/si";
 
 const ModernAboutMe = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const skills = [
-    "React.js", "Next.js", "TypeScript", "Node.js", "Python", 
-    "MongoDB", "PostgreSQL", "AWS", "Docker", "GraphQL"
+    { name: "React.js", icon: FaReact, role: "Lead UI" },
+    { name: "Express.js", icon: SiExpress, role: "Microservices" },
+    { name: "Next.js", icon: SiNextdotjs, role: "Architecture" },
+    { name: "TypeScript", icon: SiTypescript, role: "Safety" },
+    { name: "Node.js", icon: FaNodeJs, role: "Backend" },
+    { name: "Golang", icon: SiGo, role: "Performance" },
+    { name: "AWS", icon: FaAws, role: "Cloud Infra" },
+    { name: "Python", icon: SiPython, role: "Scripting" },
+    { name: "Databases", icon: FaDatabase, role: "Storage" },
+  ];
+
+  const stats = [
+    { label: "Runtime", value: "4 Years", color: "text-terminal-green" },
+    { label: "Genre", value: "Full Stack", color: "text-netflix-red" },
+    { label: "Rating", value: "99% Match", color: "text-terminal-green" },
+    { label: "Language", value: "TypeScript", color: "text-blue-400" },
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen py-20 overflow-hidden">
-      {/* Animated background - light mode optimized */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/50 to-purple-50/30 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950">
-        <div className="absolute inset-0">
-          {/* Floating geometric shapes - light mode optimized */}
-          <motion.div
-            style={{ y }}
-            className="absolute top-20 left-10 w-20 h-20 border border-blue-400/40 dark:border-blue-500/30 rotate-45"
-            animate={{ rotate: [0, 360] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.div
-            style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 150]) }}
-            className="absolute top-40 right-20 w-16 h-16 bg-purple-400/25 dark:bg-purple-500/20 rounded-full"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          />
-          <motion.div
-            style={{ y: useTransform(scrollYProgress, [0, 1], [80, -80]) }}
-            className="absolute bottom-40 left-1/4 w-12 h-12 border-2 border-emerald-400/50 dark:border-emerald-400/40 rounded-full"
-          />
-        </div>
+    <section
+      ref={ref}
+      className="relative min-h-screen py-20 bg-cinema-black text-gray-300 overflow-hidden"
+    >
+      {/* Background Matrix/Code Rain Effect (Subtle Static) */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+          <div className="h-full w-full bg-[url('/images/noise.png')] bg-repeat opacity-20"></div> 
+          {/* Note: Assuming a noise texture or just using CSS radial gradient below if image missing */}
+           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-800/20 via-cinema-black to-cinema-black"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-2 gap-16 items-center"
+        
+        {/* Section Header - "Series" Style */}
+        <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="mb-12 border-b border-gray-800 pb-4 flex items-end gap-4"
         >
-          {/* Left side - Image */}
-          <motion.div
-            variants={itemVariants}
-            className="relative"
-          >
-            <div className="relative">
-              {/* Glowing backdrop */}
-              <motion.div
-                className="absolute -inset-4 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 rounded-2xl opacity-20 blur-xl"
-                animate={{ 
-                  scale: [1, 1.05, 1],
-                  opacity: [0.2, 0.3, 0.2]
-                }}
-                transition={{ duration: 4, repeat: Infinity }}
-              />
-              
-              {/* Image container with theme-aware background */}
-              <motion.div
-                className="relative bg-gradient-to-br from-white/90 via-blue-50/80 to-white/90 dark:from-slate-800/90 dark:via-slate-700/80 dark:to-slate-800/90 backdrop-blur-xl border border-white/30 dark:border-white/10 p-3 rounded-2xl shadow-2xl"
-                whileHover={{ scale: 1.02, rotate: 2 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                {/* Inner glassmorphism frame */}
-                <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-white/50 to-white/20 dark:from-slate-700/50 dark:to-slate-800/20 backdrop-blur-sm border border-white/20 dark:border-white/5 p-1">
-                  <Image
-                    src="/images/dp.png"
-                    alt="About Avnish"
-                    width={500}
-                    height={600}
-                    className="w-full h-auto object-cover rounded-lg"
-                    style={{
-                      background: 'transparent'
-                    }}
-                  />
-                  
-                  {/* Subtle overlay gradient to blend with theme */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-500/5 via-transparent to-purple-500/5 dark:from-blue-500/10 dark:via-transparent dark:to-purple-500/10 rounded-lg" />
-                </div>
-              </motion.div>
-
-              {/* Floating stats */}
-              <motion.div
-                className="absolute -top-6 -right-6 bg-blue-500/90 backdrop-blur-sm text-white p-4 rounded-xl"
-                initial={{ scale: 0, rotate: -10 }}
-                animate={isInView ? { scale: 1, rotate: 0 } : {}}
-                transition={{ delay: 0.8, type: "spring" }}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-              >
-                <div className="text-2xl font-bold">1+</div>
-                <div className="text-sm">Years Experience</div>
-              </motion.div>
-
-              <motion.div
-                className="absolute -bottom-6 -left-6 bg-purple-500/90 backdrop-blur-sm text-white p-4 rounded-xl"
-                initial={{ scale: 0, rotate: 10 }}
-                animate={isInView ? { scale: 1, rotate: 0 } : {}}
-                transition={{ delay: 1, type: "spring" }}
-                whileHover={{ scale: 1.1, rotate: -5 }}
-              >
-                <div className="text-2xl font-bold">10+</div>
-                <div className="text-sm">Projects Done</div>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Right side - Content */}
-          <motion.div
-            variants={itemVariants}
-            className="space-y-8"
-          >
-            <div>
-              <motion.h2
-                className="text-5xl lg:text-6xl font-bold mb-6"
-                variants={itemVariants}
-              >
-                <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-emerald-400 bg-clip-text text-transparent">
-                  About Me
-                </span>
-              </motion.h2>
-              
-              <motion.div
-                variants={itemVariants}
-                className="space-y-6 text-slate-700 dark:text-gray-300 text-lg leading-relaxed"
-              >
-                <p>
-                  I&apos;m a passionate full-stack developer with a love for creating 
-                  innovative web solutions. My journey in programming started with 
-                  curiosity and has evolved into a career focused on building 
-                  exceptional digital experiences.
-                </p>
-                
-                <p>
-                  With expertise in modern technologies like React, Next.js, and 
-                  Node.js, I enjoy turning complex problems into simple, beautiful, 
-                  and intuitive solutions. I believe in writing clean, efficient 
-                  code that not only works but also stands the test of time.
-                </p>
-
-                <p>
-                  When I&apos;m not coding, you&apos;ll find me exploring new technologies, 
-                  contributing to open-source projects, or sharing knowledge with 
-                  the developer community.
-                </p>
-              </motion.div>
-            </div>
-
-            {/* Skills */}
-            <motion.div
-              variants={itemVariants}
-              className="space-y-4"
-            >
-              <h3 className="text-2xl font-semibold text-white mb-4">
-                Technologies I Work With
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill, index) => (
-                  <motion.span
-                    key={skill}
-                    className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-medium backdrop-blur-sm"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ 
-                      delay: 0.8 + index * 0.1,
-                      type: "spring",
-                      stiffness: 300 
-                    }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      backgroundColor: "rgba(59, 130, 246, 0.3)",
-                      transition: { duration: 0.2 }
-                    }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* CTA Button */}
-            <motion.div
-              variants={itemVariants}
-            >
-              <Link href="/resume">
-                <motion.button
-                  className="group relative px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-600 to-emerald-500 text-white font-semibold rounded-xl overflow-hidden"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-700 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="relative z-10 flex items-center gap-2">
-                    View My Resume
-                    <motion.svg 
-                      className="w-5 h-5" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </motion.svg>
-                  </span>
-                </motion.button>
-              </Link>
-            </motion.div>
-          </motion.div>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter">
+                BEHIND THE CODE
+            </h2>
+            <span className="text-netflix-red text-sm font-bold tracking-widest pb-1.5 uppercase">
+                Season 1: Origins
+            </span>
         </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            
+            {/* Left Column: "Movie Poster" / Character Profile */}
+            <div className="lg:col-span-4 space-y-6">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.8 }}
+                    className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-2xl border border-gray-800 group"
+                >
+                    <Image
+                        src="/images/dp.png" 
+                        alt="Avnish Gupta Profile"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    {/* Dark Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-cinema-black via-transparent to-transparent opacity-80" />
+                    
+                    <div className="absolute bottom-4 left-4 right-4">
+                        <div className="flex items-center gap-2 mb-2">
+                             <div className="bg-netflix-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-sm">TOP 10</div>
+                             <div className="text-terminal-green text-xs font-mono font-bold">#1 DEVELOPER</div>
+                        </div>
+                        <h3 className="text-2xl font-bold text-white leading-none">AVNISH GUPTA</h3>
+                        <p className="text-xs text-gray-400 mt-1 font-mono">/root/user/avnish</p>
+                    </div>
+                </motion.div>
+
+                {/* Quick Stats Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                    {stats.map((stat, i) => (
+                        <motion.div 
+                            key={i}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ delay: 0.2 + (i * 0.1) }}
+                            className="bg-gray-900/50 p-3 rounded border border-gray-800/50"
+                        >
+                            <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">{stat.label}</p>
+                            <p className={`text-sm font-bold font-mono ${stat.color}`}>{stat.value}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Right Column: "Plot Synopsis" & "Cast/Stack" */}
+            <div className="lg:col-span-8 space-y-10">
+                
+                {/* Plot Synopsis */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.3 }}
+                >
+                    <div className="flex items-center gap-2 mb-4">
+                        <FaTerminal className="text-terminal-green mt-1" />
+                        <h3 className="text-xl font-bold text-white uppercase tracking-wider">System Log / Plot Synopsis</h3>
+                    </div>
+                    <div className="text-lg text-gray-400 leading-relaxed space-y-6 font-light">
+                        <p>
+                            <span className="text-white font-medium">In a digital world chaos,</span> one developer rises to bring order to the code. 
+                            My journey began with a simple <span className="text-terminal-green font-mono">console.log(&quot;Hello World&quot;)</span>, but quickly escalated into a 
+                            full-scale passion for architecting scalable web solutions.
+                        </p>
+                        <p>
+                            I specialize in <span className="text-white">turning caffeine into clean, efficient code</span>. 
+                            From crafting pixel-perfect frontends to optimizing complex backend logic, I treat every project like a 
+                            blockbuster production—ensuring high performance, stunning visuals, and a bug-free experience.
+                        </p>
+                        <p className="italic text-gray-500 border-l-2 border-netflix-red pl-4">
+                            &quot;Coding isn&apos;t just about syntax; it&apos;s about solving the plot twists before the users even see them.&quot;
+                        </p>
+                    </div>
+                </motion.div>
+
+                {/* Tech Stack / "Cast & Crew" */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.5 }}
+                >
+                    <div className="flex items-center gap-2 mb-2">
+                        <FaCode className="text-purple-500 mt-1" />
+                        <h3 className="text-xl font-bold text-white uppercase tracking-wider">Cast &amp; Tech Stack</h3>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                        {skills.map((skill, index) => (
+                             <motion.div
+                                key={index}
+                                whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)" }}
+                                className="flex items-center gap-4 p-3 rounded-lg border border-gray-800 bg-black/40 transition-colors cursor-default"
+                             >
+                                <div className="p-2 rounded bg-gray-800 text-white">
+                                    <skill.icon className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <p className="text-white font-bold text-sm">{skill.name}</p>
+                                    <p className="text-gray-500 text-xs uppercase tracking-wide">{skill.role}</p>
+                                </div>
+                             </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Episodes / Projects CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.7 }}
+                    className=""
+                >
+                    <Link href="/resume">
+                        <button className="flex items-center gap-3 px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-colors group">
+                            <FaTerminal className="text-lg group-hover:text-netflix-red transition-colors" />
+                            <span>Run Resume.exe</span>
+                        </button>
+                    </Link>
+                </motion.div>
+
+            </div>
+
+        </div>
       </div>
     </section>
   );

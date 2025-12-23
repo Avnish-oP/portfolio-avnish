@@ -1,399 +1,268 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { motion, useInView, useMotionValue, useTransform } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLinkIcon, GithubIcon, PlayIcon } from "lucide-react";
+import { FaPlay, FaGithub, FaTimes } from "react-icons/fa";
+import { SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, SiMongodb, SiPostgresql, SiTailwindcss, SiGo, SiOpenai, SiRedis, SiSocketdotio } from "react-icons/si";
 
-const ModernProjects = () => {
+// Project Interface
+interface Project {
+  id: number;
+  priority: number;
+  title: string;
+  description: string;
+  longDescription?: string;
+  image: string;
+  tags: string[];
+  tech: any[];
+  liveUrl: string;
+  githubUrl: string;
+  match?: string;
+  duration?: string;
+  hd?: boolean;
+}
+
+// Mock Data with Priority
+const projects: Project[] = [
+  {
+    id: 1,
+    priority: 1,
+    title: "OpinionZ",
+    description: "A social platform where opinions meet facts—share, debate, and discover truth-checked perspectives.",
+    longDescription: "OpinionZ is a revolutionary social platform designed to bridge the gap between subjective opinion and objective fact. It leverages AI to verify claims in real-time, fostering healthier public discourse. Built with high-performance Go microservices and a real-time React frontend.",
+    image: "/images/opinionZ-1.png",
+    tags: ["React", "GoLang", "MongoDb", "OpenAI", "Redis"],
+    tech: [SiReact, SiGo, SiMongodb, SiOpenai, SiRedis],
+    liveUrl: "https://ai-chat-demo.com",
+    githubUrl: "https://github.com/Avnish-oP/opinionz-go",
+    match: "98% Match",
+    duration: "2024",
+    hd: true
+  },
+  {
+    id: 2,
+    priority: 1,
+    title: "Multi-Site Product Search",
+    description: "Automated product search engine crawling multiple e-commerce sites for real-time price comparison.",
+    longDescription: "A sophisticated backend-heavy search engine that aggregates product data from various e-commerce platforms. It uses advanced web crawling techniques to provide users with the best deals in real-time, ensuring data accuracy and speed.",
+    image: "/images/sih.png",
+    tags: ["Next.js", "Python", "MongoDB", "Express", "Crawling"],
+    tech: [SiNextdotjs, SiMongodb, SiNodedotjs],
+    liveUrl: "https://ecommerce-demo.com",
+    githubUrl: "https://github.com/Avnish-oP/sih-backend",
+    match: "96% Match",
+    duration: "2024",
+    hd: true
+  },
+  {
+    id: 3,
+    priority: 2,
+    title: "JAM Base",
+    description: "Real-time music party platform for shared listening sessions.",
+    image: "/images/jambase.png",
+    tags: ["Next.js", "Socket.IO", "PostgreSQL"],
+    liveUrl: "#",
+    githubUrl: "#",
+    tech: [SiNextdotjs, SiSocketdotio, SiPostgresql],
+    match: "95% Match",
+    duration: "2024",
+    hd: false
+  },
+  {
+    id: 4,
+    priority: 2,
+    title: "Smart Delhi Ideathon",
+    description: "Official portal for the 2025 Smart Delhi Ideathon.",
+    image: "/images/sdi.png",
+    tags: ["Next.js", "PostgreSQL", "Tailwind"],
+    liveUrl: "https://www.sdi2025.in/",
+    githubUrl: "https://github.com/Avnish-oP/sdi2025-website",
+    tech: [SiNextdotjs, SiPostgresql, SiTailwindcss],
+    match: "99% Match",
+    duration: "2025",
+    hd: true
+  }
+];
+
+const ModernProjects = ({ showAll = false }: { showAll?: boolean }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    once: true, 
-    amount: 0.2,
-    margin: "100px"
-  });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const [selectedProject, setSelectedProject] = useState<any>(null);
 
-  const projects = [
-    {
-      id: 1,
-      title: "Multi-Site Product Search Engine",
-      description: "A backend-heavy project that automates product searches across multiple e-commerce websites using web crawlers",
-      image: "/images/sih.png",
-      tags: ["Next.js", "TypeScript", "MongoDB", "Python", "Tailwind CSS","Express.js"],
-      liveUrl: "https://ecommerce-demo.com",
-      githubUrl: "https://github.com/Avnish-oP/sih-backend",
-      featured: true,
-      color: "#3B82F6",
-      date: "2024-12-15"
-    },
-    {
-      id: 2,
-      title: "OpinionZ",
-      description: "A social platform where opinions meet facts—share, debate, and discover truth-checked perspectives.",
-      image: "/images/opinionZ-1.png",
-      tags: ["React", "GoLang", "MongoDb", "OpenAI", "Redis"],
-      liveUrl: "https://ai-chat-demo.com",
-      githubUrl: "https://github.com/Avnish-oP/opinionz-go",
-      featured: true,
-      color: "#8B5CF6",
-      date: "2024-11-20"
-    },
-    {
-      id: 3,
-      title: "Smart Delhi Ideathon 2025 - Portal",
-      description: "Freelance project where i developed portal for Smart Delhi Ideathon 2025",
-      image: "/images/sdi.png",
-      tags: ["Nextjs", "Tailwind", "PostgreSQL", "Zod"],
-      liveUrl: "https://www.sdi2025.in/",
-      githubUrl: "https://github.com/Avnish-oP/sdi2025-website",
-      featured: false,
-      color: "#10B981",
-      date: "2025-01-10"
-    },
-    {
-      id: 4,
-      title: "Indiana Merchandise - Freelance Project",
-      description: "Portfolio website for Indiana Merchandise, showcasing products and services with a modern design.",
-      image: "/images/indiana.png",
-      tags: ["React", "Next.js", "Tailwind", "Email"],
-      liveUrl: "https://indiana-website.vercel.app/",
-      githubUrl: "https://github.com/Avnish-oP/indiana-website",
-      featured: false,
-      color: "#F59E0B",
-      date: "2024-10-05"
-    },
-    {
-      id: 5,
-      title: "JAM Base – Real-Time Music Party Platform",
-      description: "JAM Base lets users create music sessions, add songs to a shared queue, listen together in real-time, and boost their songs higher in the queue by paying.",
-      image: "/images/jambase.png",
-      tags: ["Next.js", "Socket.Io", "PostgreSQL", "Express", "Stripe"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: true,
-      color: "#EF4444",
-      date: "2024-09-15"
-    },
-    {
-      id: 6,
-      title: "Fitness Tracking App",
-      description: "Mobile-responsive fitness tracking application with workout plans, progress tracking, and social features.",
-      image: "/images/dp2.jpg",
-      tags: ["React Native", "Node.js", "MongoDB", "Expo"],
-      liveUrl: "https://fitness-demo.com",
-      githubUrl: "https://github.com/yourusername/fitness",
-      featured: false,
-      color: "#06B6D4",
-      date: "2024-08-20"
-    }
-  ];
-
-  // Sort projects by date (most recent first) and take only the first 3 for home page
-  const sortedProjects = projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  const displayProjects = sortedProjects.slice(0, 4);
-
-  const containerVariants = React.useMemo(() => ({
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  }), []);
-
-  const ProjectCard = React.memo(({ project, index }: { project: typeof projects[0], index: number }) => {
-    const cardRef = useRef<HTMLDivElement>(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const rotateX = useTransform(y, [-100, 100], [30, -30]);
-    const rotateY = useTransform(x, [-100, 100], [-30, 30]);
-    
-    const handleMouse = React.useCallback((event: React.MouseEvent) => {
-      const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-      const width = rect.width;
-      const height = rect.height;
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
-      const xPct = mouseX / width - 0.5;
-      const yPct = mouseY / height - 0.5;
-      x.set(xPct * 50);
-      y.set(yPct * 50);
-    }, [x, y]);
-
-    const handleMouseLeave = React.useCallback(() => {
-      x.set(0);
-      y.set(0);
-    }, [x, y]);
-
-    const handleMouseEnter = React.useCallback(() => {
-      // Removed state update for better performance
-    }, []);
-
-    const cardVariants = {
-      hidden: { 
-        y: 50, 
-        opacity: 0,
-        scale: 0.9
-      },
-      visible: {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        transition: {
-          type: "spring",
-          stiffness: 100,
-          damping: 12,
-          delay: index * 0.1
-        }
-      }
-    };
-
-    return (
-      <motion.div
-        ref={cardRef}
-        variants={cardVariants}
-        className={`group relative ${project.featured ? 'lg:col-span-2' : ''}`}
-        style={{ perspective: 1000 }}
-        onMouseMove={handleMouse}
-        onMouseLeave={handleMouseLeave}
-        onMouseEnter={handleMouseEnter}
-      >
-        <motion.div
-          className="relative w-full h-96 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-700/50 rounded-3xl overflow-hidden"
-          style={{
-            rotateX,
-            rotateY,
-            transformStyle: "preserve-3d",
-          }}
-          whileHover={{
-            scale: 1.02,
-            transition: { duration: 0.3 }
-          }}
-        >
-          {/* Background Image */}
-          <div className="absolute inset-0">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
-          </div>
-
-          {/* Glowing effect */}
-          <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-            style={{
-              background: `radial-gradient(circle at center, ${project.color}40 0%, transparent 70%)`
-            }}
-          />
-
-          {/* Content */}
-          <div className="relative z-10 h-full flex flex-col justify-between p-6">
-            {/* Featured badge - positioned at top */}
-            {project.featured && (
-              <motion.div
-                className="self-end"
-                initial={{ scale: 0, rotate: -10 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: index * 0.1 + 0.5 }}
-              >
-                <span 
-                  className="px-3 py-1 text-xs font-semibold rounded-full text-white"
-                  style={{ backgroundColor: project.color }}
-                >
-                  Featured
-                </span>
-              </motion.div>
-            )}
-
-            {/* Spacer for non-featured cards to push content to bottom */}
-            {!project.featured && <div></div>}
-
-            {/* Main content - always at bottom */}
-            <div className="space-y-4">
-              <motion.h3
-                className="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white"
-                initial={{ y: 20, opacity: 0 }}
-                animate={isInView ? { y: 0, opacity: 1 } : {}}
-                transition={{ delay: index * 0.1 + 0.3 }}
-              >
-                {project.title}
-              </motion.h3>
-
-              <motion.p
-                className="text-slate-700 dark:text-gray-300 text-sm lg:text-base leading-relaxed"
-                initial={{ y: 20, opacity: 0 }}
-                animate={isInView ? { y: 0, opacity: 1 } : {}}
-                transition={{ delay: index * 0.1 + 0.4 }}
-              >
-                {project.description}
-              </motion.p>
-
-              {/* Tags */}
-              <motion.div
-                className="flex flex-wrap gap-2"
-                initial={{ y: 20, opacity: 0 }}
-                animate={isInView ? { y: 0, opacity: 1 } : {}}
-                transition={{ delay: index * 0.1 + 0.5 }}
-              >
-                {project.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </motion.div>
-
-              {/* Action buttons */}
-              <motion.div
-                className="flex gap-4 pt-4"
-                initial={{ y: 20, opacity: 0 }}
-                animate={isInView ? { y: 0, opacity: 1 } : {}}
-                transition={{ delay: index * 0.1 + 0.6 }}
-              >
-                <Link href={project.liveUrl} target="_blank">
-                  <motion.button
-                    className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg text-white font-medium hover:bg-white/30 transition-colors"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <PlayIcon size={16} />
-                    Live Demo
-                  </motion.button>
-                </Link>
-
-                <Link href={project.githubUrl} target="_blank">
-                  <motion.button
-                    className="flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-sm border border-gray-600 rounded-lg text-white font-medium hover:bg-black/60 transition-colors"
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <GithubIcon size={16} />
-                    Code
-                  </motion.button>
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Floating particles on hover - using group-hover for better performance */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 rounded-full"
-                style={{ 
-                  backgroundColor: project.color,
-                  left: `${10 + i * 10}%`,
-                  top: `${20 + (i % 3) * 20}%`
-                }}
-                animate={{
-                  x: [0, 15, -15, 0],
-                  y: [0, -15, 15, 0],
-                  opacity: [0.2, 1, 0.2],
-                  scale: [0.5, 1.2, 0.5]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-          </div>
-        </motion.div>
-      </motion.div>
-    );
-  });
-
-  ProjectCard.displayName = 'ProjectCard';
+  // Filter: Show top 4 for Home (Vertical Layout), or All for Projects Page
+  const displayProjects = showAll 
+    ? projects 
+    : projects.slice(0, 4); 
 
   return (
-    <section ref={ref} className="relative min-h-screen py-20 overflow-hidden">
-      {/* Background - light mode optimized */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/40 to-purple-50/30 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950">
-        {/* Animated shapes - light mode optimized */}
-        <div className="absolute inset-0">
-          <motion.div
-            className="absolute top-20 left-10 w-32 h-32 border border-blue-400/30 dark:border-blue-500/20 rounded-full"
-            animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.div
-            className="absolute bottom-20 right-20 w-24 h-24 bg-purple-400/15 dark:bg-purple-500/10 rounded-lg"
-            animate={{ rotate: -360, scale: [1, 1.1, 1] }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          />
+    <section ref={ref} className="relative min-h-[80vh] py-20 bg-cinema-black text-white overflow-hidden">
+      
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-cinema-black via-transparent to-black/50 z-0" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        {/* Header with Link */}
+        <motion.div
+           initial={{ opacity: 0, y: 30 }}
+           animate={isInView ? { opacity: 1, y: 0 } : {}}
+           transition={{ duration: 0.8 }}
+           className="mb-8 flex items-end justify-between"
+        >
+             <h2 className="text-2xl md:text-3xl font-bold tracking-wide text-gray-100 flex items-center gap-2">
+                Trending Projects
+                <span className="text-netflix-red text-xs align-top border border-netflix-red px-1 rounded-sm">TOP 10</span>
+            </h2>
+            
+            {!showAll && (
+                 <Link href="/projects" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors flex items-center gap-1 group">
+                    Explore All <span className="group-hover:translate-x-1 transition-transform">&gt;</span>
+                 </Link>
+            )}
+        </motion.div>
+
+        {/* Projects Row (Grid) - Vertical Posters */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {displayProjects.map((project, index) => (
+                <motion.div
+                    key={project.id}
+                    layoutId={`project-card-${project.id}`}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05, zIndex: 10 }}
+                    onClick={() => setSelectedProject(project)}
+                    className="relative aspect-[2/3] rounded-md overflow-hidden cursor-pointer group shadow-lg bg-zinc-900 border border-zinc-800 hover:border-gray-500"
+                >
+                    <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="bg-netflix-red/90 rounded-full p-3 shadow-xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                             <FaPlay className="text-white ml-1 select-none" size={20} />
+                        </div>
+                    </div>
+
+                    {/* Gradient Overlay for Text Readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
+
+                    {/* Title Overlay (Bottom) */}
+                    <div className="absolute inset-x-0 bottom-0 p-3">
+                        <div className="flex items-center gap-2 mb-1">
+                             {project.match && <span className="text-[10px] font-bold text-green-400">{project.match}</span>}
+                             {project.hd && <span className="text-[10px] border border-gray-500 px-1 rounded text-gray-400">HD</span>}
+                        </div>
+                        <h3 className="text-lg font-bold text-white drop-shadow-md leading-tight mb-1">{project.title}</h3>
+                        <div className="flex flex-wrap gap-1">
+                            {project.tags.slice(0, 2).map(tag => (
+                                <span key={tag} className="text-[9px] font-bold text-gray-300 uppercase tracking-wider border border-gray-600 px-1 py-0.5 rounded-sm bg-black/50">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+            ))}
         </div>
+
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h2
-            className="text-5xl lg:text-6xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-emerald-400 bg-clip-text text-transparent">
-              Recent Projects
-            </span>
-          </motion.h2>
-          
-          <motion.p
-            className="text-xl text-slate-600 dark:text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Here are my latest projects showcasing modern web development and innovative solutions
-          </motion.p>
-        </motion.div>
-
-        {/* Projects Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-        >
-          {displayProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          <Link href="/projects">
-            <motion.button
-              className="px-8 py-4 bg-gradient-to-r from-blue-500 via-purple-600 to-emerald-500 text-white font-semibold rounded-xl"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+      {/* Quick View Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedProject(null)}
+                className="fixed inset-0 bg-black/80 z-[60] backdrop-blur-sm"
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+                layoutId={`project-card-${selectedProject.id}`}
+                className="fixed top-0 bottom-0 left-0 right-0 m-auto w-[90%] max-w-4xl h-[85vh] bg-zinc-900 rounded-lg overflow-hidden z-[70] shadow-2xl border border-zinc-800 flex flex-col"
             >
-              View All Projects
-            </motion.button>
-          </Link>
-        </motion.div>
-      </div>
+                {/* Hero / Video Area */}
+                <div className="relative h-[55%] w-full bg-black">
+                     <Image
+                        src={selectedProject.image}
+                        alt={selectedProject.title}
+                        fill
+                        className="object-cover opacity-80"
+                    />
+                    {/* Close Button */}
+                    <button 
+                        onClick={(e) => { e.stopPropagation(); setSelectedProject(null); }}
+                        className="absolute top-4 right-4 bg-black/60 p-2 rounded-full hover:bg-black/80 transition-colors z-50 text-white"
+                    >
+                        <FaTimes size={20} />
+                    </button>
+
+                    {/* Overlay Content */}
+                    <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-zinc-900 via-zinc-900/90 to-transparent">
+                         <h2 className="text-4xl md:text-5xl font-black text-white mb-4 drop-shadow-lg">{selectedProject.title}</h2>
+                         
+                         <div className="flex items-center gap-4 mb-6">
+                            <Link href={selectedProject.liveUrl} target="_blank">
+                                <button className="flex items-center gap-2 bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200 transition-colors">
+                                    <FaPlay size={18} /> Play Demo
+                                </button>
+                            </Link>
+                             <Link href={selectedProject.githubUrl} target="_blank">
+                                <button className="flex items-center gap-2 bg-gray-600/80 text-white px-6 py-2 rounded font-bold hover:bg-gray-600 transition-colors">
+                                    <FaGithub size={20} /> Code
+                                </button>
+                             </Link>
+                         </div>
+                    </div>
+                </div>
+
+                {/* Info / Details Area */}
+                <div className="flex-1 p-8 grid md:grid-cols-3 gap-8 overflow-y-auto">
+                    {/* Left: Metadata */}
+                    <div className="md:col-span-2 space-y-6">
+                         <div className="flex items-center gap-4 text-sm font-bold text-gray-400">
+                             <span className="text-green-400">{selectedProject.match}</span>
+                             <span>{selectedProject.duration}</span>
+                             {selectedProject.hd && <span className="border border-gray-500 px-1 rounded text-xs text-gray-300">HD</span>}
+                         </div>
+                         <p className="text-lg text-white leading-relaxed">
+                             {selectedProject.longDescription || selectedProject.description}
+                         </p>
+                    </div>
+
+                    {/* Right: Cast/Tags */}
+                    <div className="space-y-6 text-sm">
+                        <div>
+                             <span className="text-gray-500 block mb-1">Cast (Tech Stack):</span>
+                             <div className="flex flex-wrap gap-2 text-white">
+                                 {selectedProject.tech?.map((Icon: any, i: number) => (
+                                     <Icon key={i} className="text-gray-300 hover:text-white transition-colors" size={20} title="Tech" />
+                                 ))}
+                                 {selectedProject.tags.map((t: string) => <span key={t} className="text-gray-300 hover:text-white cursor-default">, {t}</span>)}
+                             </div>
+                        </div>
+                        <div>
+                             <span className="text-gray-500 block mb-1">Genres:</span>
+                             <span className="text-white">Web Development, Full Stack, Innovation</span>
+                        </div>
+                    </div>
+                </div>
+
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 };

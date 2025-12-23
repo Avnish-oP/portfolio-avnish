@@ -1,334 +1,213 @@
 "use client";
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FaLinkedin, FaGithub, FaTwitter, FaDownload, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
-import { TracingBeam } from './ui/tracing-beam';
+import { FaLinkedin, FaGithub, FaTwitter, FaDownload, FaMapMarkerAlt, FaPhone, FaEnvelope, FaFilm, FaAward, FaCode, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 
 const Resume = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.8 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 }
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100 dark:from-slate-950 dark:via-indigo-950/80 dark:to-slate-950 relative overflow-hidden pt-20">
-      {/* Background effects */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 blur-3xl"
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1, 0.8, 1],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        />
-      </div>
+    <div className="min-h-screen bg-zinc-950 text-gray-300 font-sans pt-24 pb-20 relative overflow-hidden">
+        
+       {/* Cinematic Grain/Noise Overlay */}
+       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('/images/noise.png')]"></div>
 
-      <div className="relative z-10">
-        <TracingBeam className='px-6 pb-10'>
+      <div className='px-4 md:px-8 max-w-4xl mx-auto'>
           <motion.div 
             ref={ref}
-            className="max-w-4xl mx-auto relative z-20"
+            className="space-y-16 relative z-10"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-          {/* Header Section */}
-          <motion.div 
-            className="glass-card-strong rounded-2xl p-8 mb-8"
-            variants={itemVariants}
-          >
-            <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
-              <div className="flex-1">
-                <motion.h1 
-                  className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-emerald-400 bg-clip-text text-transparent mb-4"
-                  animate={{ 
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  style={{ backgroundSize: "200% 200%" }}
+            
+            {/* Header: "Starring" */}
+            <motion.div variants={itemVariants} className="text-center space-y-6">
+                 <p className="text-netflix-red tracking-[0.2em] font-mono text-sm uppercase">Starring In The Role Of Software Engineer</p>
+                 <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight uppercase">Avnish Kumar</h1>
+                 
+                 <div className="flex flex-wrap justify-center gap-4 text-sm font-mono text-gray-400">
+                     <span className="flex items-center gap-2"><FaMapMarkerAlt /> New Delhi, India</span>
+                     <span className="hidden md:inline text-gray-700">|</span>
+                     <span className="flex items-center gap-2"><FaPhone /> +91 9650409384</span>
+                     <span className="hidden md:inline text-gray-700">|</span>
+                     <span className="flex items-center gap-2"><FaEnvelope /> kavnish1245@gmail.com</span>
+                 </div>
+
+                 <div className="flex justify-center gap-6 pt-4">
+                     {[
+                        { icon: FaLinkedin, href: "https://www.linkedin.com/in/avnish-gupta-23245a273/" },
+                        { icon: FaGithub, href: "https://github.com/Avnish-oP" },
+                        { icon: FaTwitter, href: "https://twitter.com/Avnish__gupta" }
+                     ].map((social, i) => (
+                         <a key={i} href={social.href} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors hover:scale-110 transform duration-200">
+                             <social.icon size={24} />
+                         </a>
+                     ))}
+                 </div>
+            </motion.div>
+
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+
+            {/* Plot Synopsis (Summary) */}
+             <motion.div variants={itemVariants} className="grid md:grid-cols-[150px_1fr] gap-2 md:gap-6">
+                 <div className="text-left md:text-right text-netflix-red font-mono text-sm uppercase pt-1">Plot Synopsis</div>
+                 <div>
+                     <p className="text-lg leading-relaxed text-gray-400">
+                        Software Engineer with experience in building scalable systems, backend APIs, and high-performance applications using <span className="text-white">Java, Golang, TypeScript, and Node.js</span>. Strong foundation in Data Structures & Algorithms, database design, and concurrency patterns. Demonstrated ability to optimise latency, automate workflows, and architect secure multi-service systems through government projects and national hackathon wins.
+                     </p>
+                 </div>
+             </motion.div>
+
+             {/* Season History (Experience) */}
+             <motion.div variants={itemVariants} className="grid md:grid-cols-[150px_1fr] gap-2 md:gap-6">
+                 <div className="text-left md:text-right text-netflix-red font-mono text-sm uppercase pt-1 flex items-center md:justify-end gap-2">
+                    Season History <FaBriefcase />
+                 </div>
+                 <div className="space-y-12">
+                     <div className="relative border-l border-gray-800 pl-8 ml-2 md:ml-0">
+                         <div className="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-netflix-red"></div>
+                         <h3 className="text-2xl font-bold text-white">Software Developer Intern</h3>
+                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+                             <p className="text-lg text-gray-400">Government of India</p>
+                             <span className="font-mono text-sm text-gray-500">June 2025 – Sept 2025</span>
+                         </div>
+                         <ul className="list-disc leading-relaxed text-gray-400 space-y-2 marker:text-gray-600">
+                             <li>Developed a custom <span className="text-white">ENC Viewer web application</span> using React.js for geospatial data visualisation.</li>
+                             <li>Built 7+ GIS tools (measurement, buffer analysis, attribute extraction) used by internal analysts to accelerate spatial operations by ~40%.</li>
+                             <li>Accelerated spatial operations by designing an optimised GIS processing module with buffer and measurement algorithms in <span className="text-white">JavaScript + Turf.js</span>.</li>
+                         </ul>
+                     </div>
+                 </div>
+             </motion.div>
+
+             {/* Feature Films (Projects) */}
+             <motion.div variants={itemVariants} className="grid md:grid-cols-[150px_1fr] gap-2 md:gap-6">
+                 <div className="text-left md:text-right text-netflix-red font-mono text-sm uppercase pt-1 flex items-center md:justify-end gap-2">
+                    Feature Films <FaFilm />
+                 </div>
+                 <div className="space-y-10">
+                     
+                     <div className="group">
+                         <h3 className="text-xl font-bold text-white group-hover:text-netflix-red transition-colors">Secure Multi-LLM SaaS Platform</h3>
+                         <p className="font-mono text-xs text-gray-500 mb-3">Next.js, Express.js, FastAPI, MongoDB Atlas, FAISS, Auth0, Gemini API</p>
+                         <ul className="list-disc ml-5 text-gray-400 space-y-1 marker:text-gray-700">
+                             <li>Built a secure multi-tenant multi-LLM SaaS platform with FastAPI and spaCy for data sanitisation and a FAISS-based retrieval pipeline.</li>
+                             <li>Integrated the <span className="text-white">Gemini API</span> as the primary LLM and implemented role-based access using Auth0/RBAC.</li>
+                             <li>Developed a real-time chat UI in Next.js using Zustand and optimised data flow across services.</li>
+                         </ul>
+                     </div>
+
+                     <div className="group">
+                         <h3 className="text-xl font-bold text-white group-hover:text-netflix-red transition-colors">Multi-Site Product Search Engine</h3>
+                         <p className="font-mono text-xs text-gray-500 mb-3">Web Crawlers, Backend Architecture, Parallel Processing</p>
+                         <ul className="list-disc ml-5 text-gray-400 space-y-1 marker:text-gray-700">
+                             <li>Backend-focused project automating product searches across multiple e-commerce platforms.</li>
+                             <li>Implemented intelligent filtering and comparison logic to benchmark products.</li>
+                             <li>Reduced price comparison runtime from minutes to seconds using <span className="text-white">parallel scraping (Promise.all)</span>.</li>
+                         </ul>
+                     </div>
+
+                     <div className="group">
+                         <h3 className="text-xl font-bold text-white group-hover:text-netflix-red transition-colors">Smart Delhi Ideathon 2025 Portal</h3>
+                         <p className="font-mono text-xs text-gray-500 mb-3">Official Event Portal, SEO, SQL Backend</p>
+                         <ul className="list-disc ml-5 text-gray-400 space-y-1 marker:text-gray-700">
+                             <li>Developed the official event portal for registrations, event updates, and announcements.</li>
+                             <li>Built a secure <span className="text-white">SQL backend</span> for handling registrations and optimised UI for SEO and performance.</li>
+                         </ul>
+                     </div>
+
+                 </div>
+             </motion.div>
+
+             {/* Special Effects (Skills) */}
+             <motion.div variants={itemVariants} className="grid md:grid-cols-[150px_1fr] gap-2 md:gap-6">
+                 <div className="text-left md:text-right text-netflix-red font-mono text-sm uppercase pt-1 flex items-center md:justify-end gap-2">
+                    Special Effects <FaCode />
+                 </div>
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                     <div>
+                         <h4 className="font-bold text-white mb-2 border-b border-gray-800 pb-1">Programming Languages</h4>
+                         <p className="text-gray-400">Java, TypeScript, Python, Golang, SQL</p>
+                     </div>
+                     <div>
+                         <h4 className="font-bold text-white mb-2 border-b border-gray-800 pb-1">Backend Engineering</h4>
+                         <p className="text-gray-400">Node.js, SpringBoot, Microservices, REST APIs, WebSockets</p>
+                     </div>
+                     <div>
+                         <h4 className="font-bold text-white mb-2 border-b border-gray-800 pb-1">Databases</h4>
+                         <p className="text-gray-400">PostgreSQL, MongoDB, VectorDB</p>
+                     </div>
+                     <div>
+                         <h4 className="font-bold text-white mb-2 border-b border-gray-800 pb-1">Systems & Tools</h4>
+                         <p className="text-gray-400">DSA, Distributed Systems, Docker, AWS, CI/CD, Linux</p>
+                     </div>
+                 </div>
+             </motion.div>
+
+             {/* Awards (Accomplishments) */}
+             <motion.div variants={itemVariants} className="grid md:grid-cols-[150px_1fr] gap-2 md:gap-6">
+                 <div className="text-left md:text-right text-netflix-red font-mono text-sm uppercase pt-1 flex items-center md:justify-end gap-2">
+                    Awards <FaAward />
+                 </div>
+                 <ul className="space-y-2">
+                     <li className="flex items-start gap-2">
+                         <span className="text-yellow-500 mt-1">★</span>
+                         <span className="text-gray-300"><span className="text-white font-bold">Smart India Hackathon 2024 Finalist</span> (Problem Statement: PS-1682)</span>
+                     </li>
+                     <li className="flex items-start gap-2">
+                         <span className="text-yellow-500 mt-1">★</span>
+                         <span className="text-gray-300"><span className="text-white font-bold">Hackcbs 8.0 MLH Track Winner</span></span>
+                     </li>
+                     <li className="flex items-start gap-2">
+                         <span className="text-yellow-500 mt-1">★</span>
+                         <span className="text-gray-300">Recognised as Top 5 in various national hackathons</span>
+                     </li>
+                 </ul>
+             </motion.div>
+
+             {/* Training Arc (Education) */}
+             <motion.div variants={itemVariants} className="grid md:grid-cols-[150px_1fr] gap-2 md:gap-6">
+                 <div className="text-left md:text-right text-netflix-red font-mono text-sm uppercase pt-1 flex items-center md:justify-end gap-2">
+                    Training Arc <FaGraduationCap />
+                 </div>
+                 <div className="space-y-6">
+                     <div>
+                         <h3 className="font-bold text-white text-lg">Guru Gobind Singh Indraprastha University</h3>
+                         <p className="text-gray-400">B.Tech, Artificial Intelligence and Data Science</p>
+                         <p className="font-mono text-sm text-gray-500">Nov 2022 - May 2026</p>
+                     </div>
+                     <div>
+                         <h3 className="font-bold text-white text-lg">Sarvodaya Bal Vidyalaya, R-Block Mangolpuri</h3>
+                         <p className="text-gray-400">Senior Secondary (XII)</p>
+                         <p className="font-mono text-sm text-gray-500">2021</p>
+                     </div>
+                 </div>
+             </motion.div>
+            
+            {/* Download Button */}
+            <motion.div variants={itemVariants} className="flex justify-center pt-8">
+                <a 
+                    href="/Resume-Avnish.pdf" 
+                    download 
+                    className="flex items-center gap-2 bg-netflix-red text-white px-8 py-3 rounded hover:bg-red-700 transition-colors font-bold uppercase tracking-wide"
                 >
-                  Avnish Kumar
-                </motion.h1>
-                
-                <div className="space-y-2 text-gray-300">
-                  <div className="flex items-center gap-2">
-                    <FaMapMarkerAlt className="text-blue-400" />
-                    <span>R-796, Mangolpur, New Delhi-110083</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <FaPhone className="text-emerald-400" />
-                    <span>9650409384</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <FaEnvelope className="text-purple-400" />
-                    <span>kavnish1245@gmail.com</span>
-                  </div>
-                </div>
-              </div>
+                    <FaDownload /> Download Script
+                </a>
+            </motion.div>
 
-              <div className="flex flex-col items-center lg:items-end gap-4">
-                <motion.a
-                  href="/Resume-Avnish.pdf"
-                  download="Resume-Avnish.pdf"
-                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 via-purple-600 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaDownload />
-                  Download PDF
-                </motion.a>
-
-                <div className="flex gap-4">
-                  {[
-                    { icon: FaLinkedin, href: "https://www.linkedin.com/in/avnish-gupta-23245a273/", color: "text-blue-400" },
-                    { icon: FaGithub, href: "https://github.com/Avnish-oP", color: "text-gray-300" },
-                    { icon: FaTwitter, href: "https://twitter.com/Avnish__gupta", color: "text-blue-300" }
-                  ].map((social, index) => (
-                    <motion.a 
-                      key={index}
-                      href={social.href} 
-                      className={`${social.color} hover:scale-110 transition-transform duration-300`}
-                      whileHover={{ y: -2 }}
-                    >
-                      <social.icon size={28} />
-                    </motion.a>
-                  ))}
-                </div>
-              </div>
-            </div>
           </motion.div>
-
-          {/* Profile Summary */}
-          <motion.div 
-            className="glass-card rounded-2xl p-8 mb-8"
-            variants={itemVariants}
-          >
-            <motion.h2 
-              className="text-2xl font-bold text-white mb-6 border-b border-blue-400/30 pb-2"
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                PROFILE SUMMARY
-              </span>
-            </motion.h2>
-            <p className="text-gray-300 leading-relaxed text-lg">
-              Skilled software developer with strong expertise in JavaScript, specializing in popular technologies like Next.js, MongoDB, PostgreSQL, and Express.js. Proficient in data structures and algorithms (DSA) with familiarity in TypeScript. Proven track record in contributing to web application development and implementing advanced functionalities.
-            </p>
-          </motion.div>
-
-          {/* Experience */}
-          <motion.div 
-            className="glass-card rounded-2xl p-8 mb-8"
-            variants={itemVariants}
-          >
-            <motion.h2 
-              className="text-2xl font-bold text-white mb-6 border-b border-blue-400/30 pb-2"
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                EXPERIENCE
-              </span>
-            </motion.h2>
-            <div className="space-y-6">
-              <motion.div 
-                className="border-l-4 border-blue-400 pl-6"
-                whileHover={{ x: 5 }}
-              >
-                <h3 className="text-xl font-semibold text-white">React.js Developer</h3>
-                <p className="text-emerald-400 font-medium">IOSC, Usar | Sept 2023 - Feb 2024</p>
-                <ul className="list-disc pl-6 mt-3 space-y-2 text-gray-300">
-                  <li>Contributed to the development of the college&apos;s food ordering app using React.js.</li>
-                  <li>Implemented advanced search functionalities including fuzzy matching and category filters.</li>
-                  <li>Developed cart management features, optimizing the checkout process with real-time subtotal calculations.</li>
-                </ul>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Education */}
-          <motion.div 
-            className="glass-card rounded-2xl p-8 mb-8"
-            variants={itemVariants}
-          >
-            <motion.h2 
-              className="text-2xl font-bold text-white mb-6 border-b border-blue-400/30 pb-2"
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                EDUCATION
-              </span>
-            </motion.h2>
-            <div className="space-y-6">
-              <motion.div 
-                className="border-l-4 border-emerald-400 pl-6"
-                whileHover={{ x: 5 }}
-              >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">
-                      B.Tech in AI-DS <span className="text-purple-400">(Ongoing)</span>
-                    </h3>
-                    <p className="text-blue-400 font-medium">USAR, Surajmal Vihar</p>
-                    <p className="text-gray-400">November 2022 - Present</p>
-                  </div>
-                  <span className="text-emerald-400 font-semibold">CGPA: 7.23</span>
-                </div>
-              </motion.div>
-              <motion.div 
-                className="border-l-4 border-emerald-400 pl-6"
-                whileHover={{ x: 5 }}
-              >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">12th Grade</h3>
-                    <p className="text-blue-400 font-medium">Sarvodaya Bal Vidyalaya, Mangolpuri</p>
-                    <p className="text-gray-400">2021</p>
-                  </div>
-                  <span className="text-emerald-400 font-semibold">Percentage: 79.6%</span>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Projects */}
-          <motion.div 
-            className="glass-card rounded-2xl p-8 mb-8"
-            variants={itemVariants}
-          >
-            <motion.h2 
-              className="text-2xl font-bold text-white mb-6 border-b border-blue-400/30 pb-2"
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                PROJECTS
-              </span>
-            </motion.h2>
-            <div className="space-y-6">
-              <motion.div 
-                className="glass-card p-6 rounded-xl border border-purple-400/20"
-                whileHover={{ scale: 1.02, y: -2 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <h3 className="text-xl font-semibold text-white mb-3">OpinionZ.com</h3>
-                <p className="text-gray-300 mb-4">Developed a web-app in Next.js enabling users to share opinions anonymously and fact-check with a single click.</p>
-                <p className="text-sm text-blue-400 font-medium">
-                  <span className="text-gray-400">Technologies: </span>
-                  Next.js, MongoDB, Node.js, TypeScript, OpenAI API, Tailwind CSS
-                </p>
-              </motion.div>
-              <motion.div 
-                className="glass-card p-6 rounded-xl border border-purple-400/20"
-                whileHover={{ scale: 1.02, y: -2 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <h3 className="text-xl font-semibold text-white mb-3">Shivalik Study Circle Web-App (Freelance Project)</h3>
-                <p className="text-gray-300 mb-4">Created a website for a coaching institute allowing teachers to upload notes, write blogs, and make announcements through an admin dashboard.</p>
-                <p className="text-sm text-blue-400 font-medium">
-                  <span className="text-gray-400">Technologies: </span>
-                  Next.js, MongoDB, Node.js, TypeScript, Content Management System, Tailwind CSS
-                </p>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Skills */}
-          <motion.div 
-            className="glass-card rounded-2xl p-8 mb-8"
-            variants={itemVariants}
-          >
-            <motion.h2 
-              className="text-2xl font-bold text-white mb-6 border-b border-blue-400/30 pb-2"
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                SKILLS
-              </span>
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { category: "Languages", skills: "JavaScript, C/C++, Python, HTML, CSS, TypeScript, SQL" },
-                { category: "Frameworks", skills: "Next.js, Express.js, React.js" },
-                { category: "Tools", skills: "Git/Github, Postman" },
-                { category: "Databases", skills: "MongoDB, PostgreSQL, MySQL" },
-                { category: "Backend", skills: "Node.js, Django (familiar)" }
-              ].map((skill, idx) => (
-                <motion.div 
-                  key={idx}
-                  className="glass-card p-4 rounded-xl"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h4 className="text-lg font-semibold text-blue-400 mb-2">{skill.category}:</h4>
-                  <p className="text-gray-300">{skill.skills}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Accomplishments */}
-          <motion.div 
-            className="glass-card rounded-2xl p-8 mb-8"
-            variants={itemVariants}
-          >
-            <motion.h2 
-              className="text-2xl font-bold text-white mb-6 border-b border-blue-400/30 pb-2"
-              whileHover={{ x: 10 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                ACCOMPLISHMENTS
-              </span>
-            </motion.h2>
-            <ul className="space-y-3">
-              {[
-                "Third position in HackUnicorn 2.0 Hackathon.",
-                "Fourth position in HackUnicorn 1.0 Hackathon.",
-                "Third position in HackHeaven Hackathon."
-              ].map((accomplishment, idx) => (
-                <motion.li 
-                  key={idx}
-                  className="flex items-center gap-3 text-gray-300"
-                  whileHover={{ x: 5 }}
-                >
-                  <div className="w-2 h-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex-shrink-0"></div>
-                  {accomplishment}
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>          </motion.div>
-        </TracingBeam>
       </div>
     </div>
   );
