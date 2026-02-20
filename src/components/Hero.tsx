@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { ArrowDown } from "lucide-react";
+import MagneticButton from "./MagneticButton";
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,6 +16,7 @@ const Hero: React.FC = () => {
   return (
     <section
       ref={containerRef}
+      id="hero"
       className="relative w-full min-h-screen flex items-center overflow-hidden bg-white dark:bg-zinc-950"
     >
       {/* Background gradient orbs */}
@@ -82,17 +84,21 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2"
             >
               <Link href="/projects">
-                <button className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-105 transition-all duration-300 text-base w-full sm:w-auto">
-                  View My Work
-                </button>
+                <MagneticButton>
+                  <div className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/40 transition-all duration-300 text-base w-full sm:w-auto text-center">
+                    View My Work
+                  </div>
+                </MagneticButton>
               </Link>
               <Link href="/contact">
-                <button className="px-8 py-4 bg-white dark:bg-zinc-900 text-gray-900 dark:text-white font-semibold rounded-xl border-2 border-gray-200 dark:border-zinc-700 hover:border-indigo-400 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-300 text-base w-full sm:w-auto">
-                  Let&apos;s Talk
-                </button>
+                <MagneticButton>
+                  <div className="px-8 py-4 flex justify-center items-center bg-white dark:bg-zinc-900 text-gray-900 dark:text-white font-semibold rounded-xl border-2 border-gray-200 dark:border-zinc-700 hover:border-indigo-400 dark:hover:border-indigo-500 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all duration-300 text-base w-full sm:w-auto h-full text-center">
+                    Let&apos;s Talk
+                  </div>
+                </MagneticButton>
               </Link>
             </motion.div>
 

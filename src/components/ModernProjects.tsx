@@ -7,6 +7,7 @@ import {
   useMotionValue,
   useSpring,
   useMotionTemplate,
+  MotionValue,
 } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,6 +29,13 @@ import {
   SiExpress,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
+
+// Context for passing tilt motion values to children for parallax
+interface TiltContextType {
+  x: MotionValue<number>;
+  y: MotionValue<number>;
+}
+const TiltContext = React.createContext<TiltContextType | null>(null);
 
 // 3D Tilt Card Component
 const TiltCard = ({ children }: { children: React.ReactNode }) => {
@@ -76,7 +84,38 @@ const TiltCard = ({ children }: { children: React.ReactNode }) => {
         style={{ background: glowBackground }}
         className="absolute inset-0 pointer-events-none z-10 rounded-2xl"
       />
-      {children}
+      <TiltContext.Provider value={{ x, y }}>
+        {children}
+      </TiltContext.Provider>
+    </motion.div>
+  );
+};
+
+// Parallax Image Container
+const ParallaxImage = ({ src, alt }: { src: string; alt: string }) => {
+  const context = React.useContext(TiltContext);
+  
+  // Hooks must be called unconditionally
+  const x = context ? context.x : useMotionValue(0);
+  const y = context ? context.y : useMotionValue(0);
+
+  const imageX = useSpring(useMotionTemplate`calc(${x}px * -0.05)`, { stiffness: 200, damping: 20 });
+  const imageY = useSpring(useMotionTemplate`calc(${y}px * -0.05)`, { stiffness: 200, damping: 20 });
+
+  // If not inside a TiltCard, just render normal image
+  if (!context) {
+    return (
+      <Image src={src} alt={alt} fill className="object-cover" />
+    );
+  }
+
+  // Inverse parallax movement
+  return (
+    <motion.div
+      style={{ x: imageX, y: imageY, scale: 1.1 }}
+      className="absolute inset-0 w-full h-full"
+    >
+      <Image src={src} alt={alt} fill className="object-cover" />
     </motion.div>
   );
 };
@@ -353,23 +392,18 @@ const ModernProjects = ({ showAll = false }: { showAll?: boolean }) => {
             onClick={() => setSelectedProject(featuredProject)}
             className="mb-8 group cursor-pointer"
           >
-            <div className="relative rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 shadow-lg hover:shadow-xl transition-all duration-500">
-              <div className="grid md:grid-cols-2">
-                {/* Image */}
-                <div className="relative h-64 md:h-auto md:min-h-[400px] overflow-hidden">
-                  <Image
-                    src={featuredProject.image}
-                    alt={featuredProject.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10 dark:to-zinc-900/30" />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-semibold rounded-full uppercase tracking-wider">
-                      Featured
-                    </span>
+              <TiltCard>
+                <div className="grid md:grid-cols-2 h-full">
+                  {/* Image */}
+                  <div className="relative h-64 md:h-auto md:min-h-[400px] overflow-hidden">
+                    <ParallaxImage src={featuredProject.image} alt={featuredProject.title} />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10 dark:to-zinc-900/30 group-hover:opacity-0 transition-opacity duration-500" />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-semibold rounded-full uppercase tracking-wider shadow-lg shadow-indigo-500/30">
+                        Featured
+                      </span>
+                    </div>
                   </div>
-                </div>
 
                 {/* Content */}
                 <div className="p-8 md:p-10 flex flex-col justify-center">
@@ -418,7 +452,7 @@ const ModernProjects = ({ showAll = false }: { showAll?: boolean }) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </TiltCard>
           </motion.div>
         )}
 
@@ -439,12 +473,7 @@ const ModernProjects = ({ showAll = false }: { showAll?: boolean }) => {
                 <TiltCard>
                   {/* Image */}
                   <div className="relative h-48 sm:h-56 overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    <ParallaxImage src={project.image} alt={project.title} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                     {/* Category badge */}

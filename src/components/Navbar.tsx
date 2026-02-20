@@ -4,23 +4,57 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { motion, AnimatePresence } from "framer-motion";
+import MagneticButton from "./MagneticButton";
 
 function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Intersection Observer for scroll spy
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -60% 0px", // Trigger when section crosses the middle of viewport
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Select sections to track
+    const sections = ["hero", "work", "about", "contact"].map((id) =>
+      document.getElementById(id)
+    );
+
+    sections.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      sections.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+    };
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Work", href: "/projects" },
-    { name: "Resume", href: "/resume" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "/", sectionId: "hero" },
+    { name: "Work", href: "/projects", sectionId: "work" },
+    { name: "Resume", href: "/resume", sectionId: "about" }, // Assuming about links to resume mostly
+    { name: "Contact", href: "/contact", sectionId: "contact" },
   ];
 
   return (
@@ -47,13 +81,21 @@ function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              // Active if we're on the dedicated page OR if we're on the homepage and scrolling through the section
+              const isActive = 
+                pathname === link.href || 
+                (pathname === "/" && activeSection === link.sectionId && link.href !== "/");
+                
+              const isHomeActive = pathname === "/" && (activeSection === "hero" || activeSection === "");
+
+              const finalIsActive = link.name === "Home" ? isHomeActive : isActive;
+
               return (
                 <Link
                   key={link.name}
                   href={link.href}
                   className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                    isActive
+                    finalIsActive
                       ? "text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10"
                       : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800"
                   }`}
@@ -67,9 +109,11 @@ function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Link href="/contact">
-              <button className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-sm font-semibold rounded-lg shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 transition-all duration-300">
-                Let&apos;s Talk
-              </button>
+              <MagneticButton>
+                <div className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-sm font-semibold rounded-lg shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 transition-all duration-300">
+                  Let&apos;s Talk
+                </div>
+              </MagneticButton>
             </Link>
           </div>
 
