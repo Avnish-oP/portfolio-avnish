@@ -1,8 +1,9 @@
 import Hero from "@/components/Hero";
+import ModernProjects from "@/components/ModernProjects";
 import ModernAboutMe from "@/components/ModernAboutMe";
 import ModernSkills from "@/components/ModernSkills";
-import ModernProjects from "@/components/ModernProjects";
 import ModernContact from "@/components/ModernContact";
+import TechMarquee from "@/components/TechMarquee";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import LoadingScreen from "@/components/LoadingScreen";
 
@@ -11,11 +12,12 @@ export default function Home() {
     <>
       <LoadingScreen />
       <SmoothScrollProvider>
-        <div className="min-h-screen bg-slate-50 dark:bg-zinc-950">
+        <div className="min-h-screen bg-white dark:bg-zinc-950">
           <Hero />
+          <TechMarquee />
+          <ModernProjects />
           <ModernAboutMe />
           <ModernSkills />
-          <ModernProjects />
           <ModernContact />
         </div>
       </SmoothScrollProvider>

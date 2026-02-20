@@ -13,11 +13,10 @@ import {
   SiAmazonaws,
   SiGraphql,
   SiTailwindcss,
-  SiJavascript,
-  SiGit,
   SiRedis,
   SiGo,
-  SiExpress
+  SiExpress,
+  SiGit,
 } from "react-icons/si";
 
 const ModernSkills = () => {
@@ -26,114 +25,116 @@ const ModernSkills = () => {
 
   const categories = [
     {
-      title: "Frontend Engineering",
+      title: "Frontend Development",
+      description: "Responsive, performant user interfaces",
       skills: [
-        { name: "React", icon: SiReact, badge: "v18" },
-        { name: "Next.js", icon: SiNextdotjs, badge: "App Dir" },
-        { name: "TypeScript", icon: SiTypescript, badge: "Strict" },
-        { name: "Tailwind", icon: SiTailwindcss, badge: "v3" },
-      ]
+        { name: "React", icon: SiReact, experience: "3+ yrs" },
+        { name: "Next.js", icon: SiNextdotjs, experience: "2+ yrs" },
+        { name: "TypeScript", icon: SiTypescript, experience: "2+ yrs" },
+        { name: "Tailwind CSS", icon: SiTailwindcss, experience: "2+ yrs" },
+      ],
     },
     {
-      title: "Backend Architecture",
+      title: "Backend Engineering",
+      description: "Scalable APIs & microservices",
       skills: [
-        { name: "Node.js", icon: SiNodedotjs, badge: "LTS" },
-        { name: "Express", icon: SiExpress, badge: "REST" },
-        { name: "Golang", icon: SiGo, badge: "Microservices" },
-        { name: "Python", icon: SiPython, badge: "AI/ML" },
-        { name: "GraphQL", icon: SiGraphql, badge: "Apollo" },
-      ]
+        { name: "Node.js", icon: SiNodedotjs, experience: "3+ yrs" },
+        { name: "Express", icon: SiExpress, experience: "3+ yrs" },
+        { name: "Golang", icon: SiGo, experience: "1+ yr" },
+        { name: "Python", icon: SiPython, experience: "2+ yrs" },
+        { name: "GraphQL", icon: SiGraphql, experience: "1+ yr" },
+      ],
     },
     {
-      title: "Cloud & DevOps",
+      title: "Databases & Cloud",
+      description: "Storage, caching, and infrastructure",
       skills: [
-        { name: "AWS", icon: SiAmazonaws, badge: "Certified" },
-        { name: "Docker", icon: SiDocker, badge: "Containers" },
-        { name: "PostgreSQL", icon: SiPostgresql, badge: "Relational" },
-        { name: "MongoDB", icon: SiMongodb, badge: "NoSQL" },
-        { name: "Redis", icon: SiRedis, badge: "Caching" },
-      ]
-    }
+        { name: "PostgreSQL", icon: SiPostgresql, experience: "2+ yrs" },
+        { name: "MongoDB", icon: SiMongodb, experience: "3+ yrs" },
+        { name: "Redis", icon: SiRedis, experience: "1+ yr" },
+        { name: "AWS", icon: SiAmazonaws, experience: "1+ yr" },
+        { name: "Docker", icon: SiDocker, experience: "1+ yr" },
+        { name: "Git", icon: SiGit, experience: "3+ yrs" },
+      ],
+    },
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen py-20 bg-cinema-black text-white overflow-hidden">
-      
-      {/* Cinematic Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-cinema-black z-0" />
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
-        {/* Header */}
+    <section
+      ref={ref}
+      className="relative py-24 bg-gray-50 dark:bg-zinc-900/50 overflow-hidden"
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(99_102_241/0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgb(99_102_241/0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgb(99_102_241/0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgb(99_102_241/0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
-           initial={{ opacity: 0, y: 30 }}
-           animate={isInView ? { opacity: 1, y: 0 } : {}}
-           transition={{ duration: 0.8 }}
-           className="mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="mb-16"
         >
-            <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter">
-                PRODUCTION TOOLKIT
-            </h2>
-            <div className="flex items-center gap-3 text-gray-400 text-sm font-bold tracking-widest uppercase">
-                <span className="bg-white text-black px-1.5 py-0.5 rounded-sm">HD</span>
-                <span>Technical Specifications</span>
-                <span className="text-netflix-red">2025</span>
-            </div>
+          <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">
+            Skills & Expertise
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">
+            Technologies I Work With
+          </h2>
         </motion.div>
 
-        {/* Categories / Genre Rows */}
+        {/* Skill Categories */}
         <div className="space-y-12">
-            {categories.map((category, catIndex) => (
-                <div key={category.title}>
-                    <motion.h3 
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ delay: 0.2 + (catIndex * 0.1) }}
-                        className="text-xl md:text-2xl font-bold text-gray-200 mb-4 hover:text-white transition-colors cursor-pointer flex items-center gap-2 group"
-                    >
-                        {category.title}
-                        <span className="text-netflix-red text-sm opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 duration-300">Explore &gt;</span>
-                    </motion.h3>
-                    
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                        {category.skills.map((skill, skillIndex) => (
-                            <motion.div
-                                key={skill.name}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                                transition={{ delay: 0.3 + (catIndex * 0.1) + (skillIndex * 0.05) }}
-                                whileHover={{ scale: 1.05, zIndex: 10 }}
-                                className="relative aspect-video bg-zinc-900 rounded border border-zinc-800 hover:border-gray-500 overflow-hidden group cursor-pointer transition-all duration-300 shadow-lg"
-                            >
-                                {/* Default State: Icon + Name */}
-                                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 opacity-100 group-hover:opacity-20">
-                                    <skill.icon className="w-8 h-8 md:w-10 md:h-10 text-gray-400 mb-2 group-hover:text-white transition-colors" />
-                                    <span className="text-sm font-bold text-gray-300">{skill.name}</span>
-                                </div>
-
-                                {/* Hover State: Details / Badge */}
-                                <div className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black via-black/80 to-transparent">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <div className="w-8 h-8 rounded-full bg-netflix-red flex items-center justify-center">
-                                            <skill.icon className="w-4 h-4 text-white" />
-                                        </div>
-                                        <span className="font-bold text-sm bg-gray-800 px-2 py-0.5 rounded text-white border border-gray-600">
-                                            {skill.badge}
-                                        </span>
-                                    </div>
-                                    <p className="text-white font-bold text-lg">{skill.name}</p>
-                                    <div className="flex gap-2 text-[10px] text-green-400 font-mono mt-1">
-                                        <span>98% Match</span>
-                                        <span className="text-gray-400">Production Ready</span>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+          {categories.map((category, catIndex) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.2 + catIndex * 0.15 }}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <span className="w-8 h-[2px] bg-indigo-600 dark:bg-indigo-400" />
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    {category.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 dark:text-zinc-500">
+                    {category.description}
+                  </p>
                 </div>
-            ))}
-        </div>
+              </div>
 
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{
+                      delay: 0.3 + catIndex * 0.1 + skillIndex * 0.05,
+                    }}
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    className="group p-4 rounded-xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-indigo-800 hover:shadow-lg hover:shadow-indigo-500/5 transition-all duration-300 cursor-default"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-zinc-800 flex items-center justify-center group-hover:bg-indigo-50 dark:group-hover:bg-indigo-500/10 transition-colors">
+                        <skill.icon className="w-5 h-5 text-gray-600 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                          {skill.name}
+                        </p>
+                        <p className="text-[11px] text-gray-500 dark:text-zinc-500 font-medium">
+                          {skill.experience}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

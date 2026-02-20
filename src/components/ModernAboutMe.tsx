@@ -1,186 +1,259 @@
 "use client";
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useInView, animate } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { FaTerminal, FaCode, FaServer, FaDatabase, FaReact, FaNodeJs, FaAws, FaDocker } from "react-icons/fa";
-import { SiTypescript, SiNextdotjs, SiMongodb, SiPostgresql, SiGraphql, SiPython, SiGo, SiExpress } from "react-icons/si";
+import {
+  FaCode,
+  FaServer,
+  FaRocket,
+  FaHandshake,
+} from "react-icons/fa";
+
+// Animated Counter Component
+const AnimatedCounter = ({
+  target,
+  suffix = "",
+  isInView,
+}: {
+  target: number;
+  suffix: string;
+  isInView: boolean;
+}) => {
+  const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    if (isInView && !hasAnimated.current) {
+      hasAnimated.current = true;
+      const controls = animate(0, target, {
+        duration: 2,
+        ease: "easeOut",
+        onUpdate: (v) => setCount(Math.round(v)),
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, target]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+};
 
 const ModernAboutMe = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  const skills = [
-    { name: "React.js", icon: FaReact, role: "Lead UI" },
-    { name: "Express.js", icon: SiExpress, role: "Microservices" },
-    { name: "Next.js", icon: SiNextdotjs, role: "Architecture" },
-    { name: "TypeScript", icon: SiTypescript, role: "Safety" },
-    { name: "Node.js", icon: FaNodeJs, role: "Backend" },
-    { name: "Golang", icon: SiGo, role: "Performance" },
-    { name: "AWS", icon: FaAws, role: "Cloud Infra" },
-    { name: "Python", icon: SiPython, role: "Scripting" },
-    { name: "Databases", icon: FaDatabase, role: "Storage" },
-  ];
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   const stats = [
-    { label: "Runtime", value: "4 Years", color: "text-terminal-green" },
-    { label: "Genre", value: "Full Stack", color: "text-netflix-red" },
-    { label: "Rating", value: "99% Match", color: "text-terminal-green" },
-    { label: "Language", value: "TypeScript", color: "text-blue-400" },
+    { label: "Freelance Clients", value: 2, suffix: "+", color: "from-indigo-500 to-violet-500" },
+    { label: "APIs Built", value: 12, suffix: "+", color: "from-violet-500 to-purple-500" },
+    { label: "Govt. Projects", value: 1, suffix: "", color: "from-purple-500 to-pink-500" },
+    { label: "Hackathon Wins", value: 3, suffix: "+", color: "from-pink-500 to-rose-500" },
+  ];
+
+  const process = [
+    {
+      icon: FaHandshake,
+      title: "Discovery",
+      desc: "Understanding your goals, users, and technical requirements.",
+    },
+    {
+      icon: FaCode,
+      title: "Design & Build",
+      desc: "Clean architecture with modern tech stack for scalability.",
+    },
+    {
+      icon: FaServer,
+      title: "Deploy & Optimize",
+      desc: "CI/CD pipelines, performance tuning, and monitoring.",
+    },
+    {
+      icon: FaRocket,
+      title: "Launch & Support",
+      desc: "Go-live support and ongoing maintenance as needed.",
+    },
   ];
 
   return (
     <section
       ref={ref}
-      className="relative min-h-screen py-20 bg-cinema-black text-gray-300 overflow-hidden"
+      id="about"
+      className="relative py-24 bg-white dark:bg-zinc-950 overflow-hidden"
     >
-      {/* Background Matrix/Code Rain Effect (Subtle Static) */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-          <div className="h-full w-full bg-[url('/images/noise.png')] bg-repeat opacity-20"></div> 
-          {/* Note: Assuming a noise texture or just using CSS radial gradient below if image missing */}
-           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-800/20 via-cinema-black to-cinema-black"></div>
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/5 dark:bg-violet-500/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header - "Series" Style */}
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="mb-12 border-b border-gray-800 pb-4 flex items-end gap-4"
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
         >
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter">
-                BEHIND THE CODE
-            </h2>
-            <span className="text-netflix-red text-sm font-bold tracking-widest pb-1.5 uppercase">
-                Season 1: Origins
-            </span>
+          <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">
+            About Me
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">
+            Building Digital Solutions<br />
+            <span className="gradient-text-primary">That Matter</span>
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            
-            {/* Left Column: "Movie Poster" / Character Profile */}
-            <div className="lg:col-span-4 space-y-6">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+          {/* Left: Profile + Stats */}
+          <div className="lg:col-span-5 space-y-8">
+            {/* Profile Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8 }}
+              className="relative rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-zinc-800 group"
+            >
+              <div className="aspect-[4/5] relative">
+                <Image
+                  src="/images/dp.png"
+                  alt="Avnish Kumar"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
+              </div>
+
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h3 className="text-2xl font-bold text-white">Avnish Kumar</h3>
+                <p className="text-sm text-gray-300 mt-1">
+                  Fullstack Developer · B.Tech AI & DS
+                </p>
+                <p className="text-xs text-gray-400 mt-1">
+                  📍 New Delhi, India
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Stats Grid — Animated Counters */}
+            <div className="grid grid-cols-2 gap-3">
+              {stats.map((stat, i) => (
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.8 }}
-                    className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-2xl border border-gray-800 group"
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="p-4 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-center"
                 >
-                    <Image
-                        src="/images/dp.png" 
-                        alt="Avnish Gupta Profile"
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  <p
+                    className={`text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
+                  >
+                    <AnimatedCounter
+                      target={stat.value}
+                      suffix={stat.suffix}
+                      isInView={isInView}
                     />
-                    {/* Dark Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-cinema-black via-transparent to-transparent opacity-80" />
-                    
-                    <div className="absolute bottom-4 left-4 right-4">
-                        <div className="flex items-center gap-2 mb-2">
-                             <div className="bg-netflix-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-sm">TOP 10</div>
-                             <div className="text-terminal-green text-xs font-mono font-bold">#1 DEVELOPER</div>
-                        </div>
-                        <h3 className="text-2xl font-bold text-white leading-none">AVNISH GUPTA</h3>
-                        <p className="text-xs text-gray-400 mt-1 font-mono">/root/user/avnish</p>
-                    </div>
+                  </p>
+                  <p className="text-xs font-medium text-gray-500 dark:text-zinc-500 mt-1 uppercase tracking-wide">
+                    {stat.label}
+                  </p>
                 </motion.div>
-
-                {/* Quick Stats Grid */}
-                <div className="grid grid-cols-2 gap-4">
-                    {stats.map((stat, i) => (
-                        <motion.div 
-                            key={i}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ delay: 0.2 + (i * 0.1) }}
-                            className="bg-gray-900/50 p-3 rounded border border-gray-800/50"
-                        >
-                            <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">{stat.label}</p>
-                            <p className={`text-sm font-bold font-mono ${stat.color}`}>{stat.value}</p>
-                        </motion.div>
-                    ))}
-                </div>
+              ))}
             </div>
+          </div>
 
-            {/* Right Column: "Plot Synopsis" & "Cast/Stack" */}
-            <div className="lg:col-span-8 space-y-10">
-                
-                {/* Plot Synopsis */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+          {/* Right: Bio + Process */}
+          <div className="lg:col-span-7 space-y-12">
+            {/* Bio */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.3 }}
+              className="space-y-6"
+            >
+              <div className="text-lg text-gray-600 dark:text-zinc-400 leading-relaxed space-y-4">
+                <p>
+                  I&apos;m a results-driven fullstack developer experienced in building{" "}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    scalable full-stack applications and RESTful APIs
+                  </span>
+                  . I specialize in JavaScript, TypeScript, React, Next.js, and Express.js — delivering
+                  production-grade software that drives measurable business results.
+                </p>
+                <p>
+                  I&apos;ve built a{" "}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    full-stack e-commerce platform
+                  </span>{" "}
+                  as a freelancer, delivered{" "}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    GIS applications for the Government of India
+                  </span>{" "}
+                  that improved analyst efficiency by 40%, and won{" "}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    HackCBS 8.0 (1st place among 500+)
+                  </span>
+                  . I care deeply about security, clean architecture, and user experience.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Working Process */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5 }}
+            >
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                <span className="w-8 h-[2px] bg-indigo-600 dark:bg-indigo-400" />
+                How I Work
+              </h3>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {process.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.3 }}
-                >
-                    <div className="flex items-center gap-2 mb-4">
-                        <FaTerminal className="text-terminal-green mt-1" />
-                        <h3 className="text-xl font-bold text-white uppercase tracking-wider">System Log / Plot Synopsis</h3>
+                    transition={{ delay: 0.6 + index * 0.1 }}
+                    className="p-5 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 hover:border-indigo-300 dark:hover:border-indigo-800 transition-colors group"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-500/10 flex items-center justify-center group-hover:bg-indigo-200 dark:group-hover:bg-indigo-500/20 transition-colors">
+                        <step.icon className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400">
+                          0{index + 1}
+                        </span>
+                        <h4 className="text-sm font-bold text-gray-900 dark:text-white">
+                          {step.title}
+                        </h4>
+                      </div>
                     </div>
-                    <div className="text-lg text-gray-400 leading-relaxed space-y-6 font-light">
-                        <p>
-                            <span className="text-white font-medium">In a digital world chaos,</span> one developer rises to bring order to the code. 
-                            My journey began with a simple <span className="text-terminal-green font-mono">console.log(&quot;Hello World&quot;)</span>, but quickly escalated into a 
-                            full-scale passion for architecting scalable web solutions.
-                        </p>
-                        <p>
-                            I specialize in <span className="text-white">turning caffeine into clean, efficient code</span>. 
-                            From crafting pixel-perfect frontends to optimizing complex backend logic, I treat every project like a 
-                            blockbuster production—ensuring high performance, stunning visuals, and a bug-free experience.
-                        </p>
-                        <p className="italic text-gray-500 border-l-2 border-netflix-red pl-4">
-                            &quot;Coding isn&apos;t just about syntax; it&apos;s about solving the plot twists before the users even see them.&quot;
-                        </p>
-                    </div>
-                </motion.div>
+                    <p className="text-sm text-gray-600 dark:text-zinc-400 leading-relaxed">
+                      {step.desc}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
 
-                {/* Tech Stack / "Cast & Crew" */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.5 }}
-                >
-                    <div className="flex items-center gap-2 mb-2">
-                        <FaCode className="text-purple-500 mt-1" />
-                        <h3 className="text-xl font-bold text-white uppercase tracking-wider">Cast &amp; Tech Stack</h3>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                        {skills.map((skill, index) => (
-                             <motion.div
-                                key={index}
-                                whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)" }}
-                                className="flex items-center gap-4 p-3 rounded-lg border border-gray-800 bg-black/40 transition-colors cursor-default"
-                             >
-                                <div className="p-2 rounded bg-gray-800 text-white">
-                                    <skill.icon className="w-5 h-5" />
-                                </div>
-                                <div>
-                                    <p className="text-white font-bold text-sm">{skill.name}</p>
-                                    <p className="text-gray-500 text-xs uppercase tracking-wide">{skill.role}</p>
-                                </div>
-                             </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
-
-                {/* Episodes / Projects CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.7 }}
-                    className=""
-                >
-                    <Link href="/resume">
-                        <button className="flex items-center gap-3 px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-colors group">
-                            <FaTerminal className="text-lg group-hover:text-netflix-red transition-colors" />
-                            <span>Run Resume.exe</span>
-                        </button>
-                    </Link>
-                </motion.div>
-
-            </div>
-
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.8 }}
+            >
+              <Link href="/resume">
+                <button className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 transition-all duration-300">
+                  View Full Resume →
+                </button>
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

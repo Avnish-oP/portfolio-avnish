@@ -4,7 +4,7 @@ import ModernContact from "@/components/ModernContact";
 
 const ContactPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950/80 to-slate-950">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 pt-20">
       <ModernContact />
     </div>
   );

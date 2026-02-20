@@ -4,7 +4,7 @@ import ModernProjects from "@/components/ModernProjects";
 
 const ProjectsPage = () => {
   return (
-    <div className="min-h-screen bg-cinema-black">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 pt-20">
       <ModernProjects showAll={true} />
     </div>
   );

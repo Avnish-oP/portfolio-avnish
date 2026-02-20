@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 const CustomCursor = () => {
@@ -51,7 +51,7 @@ const CustomCursor = () => {
 
   return (
     <>
-      {/* Main cursor with refined colors */}
+      {/* Outer ring */}
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] hidden lg:block"
         style={{
@@ -60,17 +60,17 @@ const CustomCursor = () => {
         }}
       >
         <motion.div
-          className="w-full h-full rounded-full border border-[#E50914]"
+          className="w-full h-full rounded-full border border-indigo-500"
           animate={{
             scale: isHovered ? 1.5 : isClicked ? 0.8 : 1,
-            borderColor: "#E50914",
-            opacity: isHovered ? 0.8 : 0.4
+            borderColor: isHovered ? "#818cf8" : "#6366f1",
+            opacity: isHovered ? 0.9 : 0.5,
           }}
           transition={{ type: "spring", stiffness: 400, damping: 25 }}
         />
       </motion.div>
 
-      {/* Cursor dot with refined colors */}
+      {/* Inner dot */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 pointer-events-none z-[9999] hidden lg:block"
         style={{
@@ -79,7 +79,7 @@ const CustomCursor = () => {
         }}
       >
         <motion.div
-          className="w-full h-full rounded-full bg-[#E50914] relative left-[12px] top-[12px] shadow-[0_0_10px_#E50914]"
+          className="w-full h-full rounded-full bg-indigo-500 relative left-[12px] top-[12px] shadow-[0_0_8px_rgba(99,102,241,0.6)]"
           animate={{
             scale: isClicked ? 1.2 : 1,
           }}
