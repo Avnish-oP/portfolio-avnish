@@ -17,13 +17,37 @@ import {
   SiGo,
   SiExpress,
   SiGit,
+  SiFastapi,
 } from "react-icons/si";
+import { FaBrain, FaProjectDiagram, FaRobot, FaMemory, FaEye } from "react-icons/fa";
 
 const ModernSkills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const categories = [
+    {
+      title: "Applied AI & Agents",
+      description: "RAG, LLM orchestration, and observability",
+      skills: [
+        { name: "Adv. RAG", icon: FaBrain, experience: "1+ yr" },
+        { name: "LangGraph", icon: FaProjectDiagram, experience: "1+ yr" },
+        { name: "Agent SDKs", icon: FaRobot, experience: "1+ yr" },
+        { name: "LLM Memory", icon: FaMemory, experience: "1+ yr" },
+        { name: "Observability", icon: FaEye, experience: "1+ yr" },
+      ],
+    },
+    {
+      title: "AI & Backend Engineering",
+      description: "Scalable APIs, AI integrations & microservices",
+      skills: [
+        { name: "Node.js", icon: SiNodedotjs, experience: "3+ yrs" },
+        { name: "Python", icon: SiPython, experience: "2+ yrs" },
+        { name: "FastAPI", icon: SiFastapi, experience: "1+ yr" },
+        { name: "Express", icon: SiExpress, experience: "3+ yrs" },
+        { name: "Golang", icon: SiGo, experience: "1+ yr" },
+      ],
+    },
     {
       title: "Frontend Development",
       description: "Responsive, performant user interfaces",
@@ -32,17 +56,6 @@ const ModernSkills = () => {
         { name: "Next.js", icon: SiNextdotjs, experience: "2+ yrs" },
         { name: "TypeScript", icon: SiTypescript, experience: "2+ yrs" },
         { name: "Tailwind CSS", icon: SiTailwindcss, experience: "2+ yrs" },
-      ],
-    },
-    {
-      title: "Backend Engineering",
-      description: "Scalable APIs & microservices",
-      skills: [
-        { name: "Node.js", icon: SiNodedotjs, experience: "3+ yrs" },
-        { name: "Express", icon: SiExpress, experience: "3+ yrs" },
-        { name: "Golang", icon: SiGo, experience: "1+ yr" },
-        { name: "Python", icon: SiPython, experience: "2+ yrs" },
-        { name: "GraphQL", icon: SiGraphql, experience: "1+ yr" },
       ],
     },
     {

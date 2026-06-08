@@ -48,9 +48,9 @@ const ModernAboutMe = () => {
   const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   const stats = [
-    { label: "Freelance Clients", value: 2, suffix: "+", color: "from-indigo-500 to-violet-500" },
+    { label: "Freelance Clients", value: 5, suffix: "+", color: "from-indigo-500 to-violet-500" },
     { label: "APIs Built", value: 12, suffix: "+", color: "from-violet-500 to-purple-500" },
-    { label: "Govt. Projects", value: 1, suffix: "", color: "from-purple-500 to-pink-500" },
+    { label: "Govt. Projects", value: 2, suffix: "+", color: "from-purple-500 to-pink-500" },
     { label: "Hackathon Wins", value: 3, suffix: "+", color: "from-pink-500 to-rose-500" },
   ];
 
@@ -175,27 +175,24 @@ const ModernAboutMe = () => {
             >
               <div className="text-lg text-gray-600 dark:text-zinc-400 leading-relaxed space-y-4">
                 <p>
-                  I&apos;m a results-driven fullstack developer experienced in building{" "}
+                  I&apos;m a results-driven full-stack systems engineer experienced in building{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    scalable full-stack applications and RESTful APIs
+                    scalable platforms and intelligent AI solutions
                   </span>
-                  . I specialize in JavaScript, TypeScript, React, Next.js, and Express.js — delivering
-                  production-grade software that drives measurable business results.
+                  . I specialize in Next.js, Node.js, Python, and LLM integrations — delivering
+                  production-grade software that drives measurable business impact.
                 </p>
                 <p>
-                  I&apos;ve built a{" "}
+                  I&apos;ve built{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    full-stack e-commerce platform
+                    secure multi-LLM SaaS platforms
                   </span>{" "}
-                  as a freelancer, delivered{" "}
+                  as a hackathon winner, engineered high-performance{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    GIS applications for the Government of India
+                    data visualization platforms for the Government of India
                   </span>{" "}
-                  that improved analyst efficiency by 40%, and won{" "}
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    HackCBS 8.0 (1st place among 500+)
-                  </span>
-                  . I care deeply about security, clean architecture, and user experience.
+                  handling 50M+ rows of data, and delivered e-commerce systems as a freelancer. 
+                  I care deeply about system architecture, AI integration, and robust performance.
                 </p>
               </div>
             </motion.div>

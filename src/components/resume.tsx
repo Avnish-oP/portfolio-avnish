@@ -117,21 +117,19 @@ const Resume = () => {
             <div>
               <p className="text-lg leading-relaxed">
                 Results-driven Software Engineer with experience building
-                scalable full-stack applications and RESTful APIs. Proven
+                scalable platforms and intelligent AI solutions. Proven
                 expertise in{" "}
                 <span className="font-semibold text-gray-900 dark:text-white">
-                  JavaScript, TypeScript, and modern frameworks (React, Next.js,
+                  Python, TypeScript, and modern frameworks (Next.js, FastAPI,
                   Express.js)
                 </span>
                 . Successfully delivered production-grade applications for
-                government agencies, improving operational efficiency by 40%.
+                government agencies, handling massive datasets and improving operational efficiency.
                 Recognised through national hackathon wins and finalist
                 positions. Skilled in{" "}
                 <span className="font-semibold text-gray-900 dark:text-white">
-                  cloud deployment (AWS, Vercel), security (JWT, OAuth, RBAC),
-                  and Agile development
+                  system architecture, AI integration, security, and cloud deployment.
                 </span>
-                .
               </p>
             </div>
           </motion.div>
@@ -191,6 +189,36 @@ const Resume = () => {
                       AWS ECS/Supabase
                     </span>
                     .
+                  </li>
+                </ul>
+              </div>
+
+              {/* Ocean Data Viewer Govt Internship */}
+              <div className="relative border-l-2 border-indigo-200 dark:border-indigo-800 pl-8 ml-2 md:ml-0 mt-10">
+                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-indigo-600 dark:bg-indigo-400 border-4 border-white dark:border-zinc-950" />
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  Software Developer Intern
+                </h3>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+                  <p className="text-base text-gray-600 dark:text-zinc-400 font-medium">
+                    Government of India
+                  </p>
+                  <span className="text-sm text-gray-500 dark:text-zinc-500">
+                    Jan 2026 – Apr 2026
+                  </span>
+                </div>
+                <ul className="list-disc leading-relaxed space-y-2 ml-5 marker:text-indigo-400">
+                  <li>
+                    Developed an advanced Ocean Data Viewer (ODV), a scalable full-stack platform for visualization and analysis of large-scale datasets.
+                  </li>
+                  <li>
+                    Engineered backend systems handling <span className="font-semibold text-gray-900 dark:text-white">56M+ rows per table</span>, reducing query latency to milliseconds using PostGIS and Redis caching.
+                  </li>
+                  <li>
+                    Designed high-performance GIS query pipelines supporting complex spatial analysis operations.
+                  </li>
+                  <li>
+                    Built interactive geospatial visualizations and analytical tooling to accelerate scientific workflows.
                   </li>
                 </ul>
               </div>

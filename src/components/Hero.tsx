@@ -58,10 +58,10 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                <span className="text-gray-900 dark:text-white">I Build Web</span>
+                <span className="text-gray-900 dark:text-white">I Build Scalable</span>
                 <br />
-                <span className="text-gray-900 dark:text-white">Experiences That </span>
-                <span className="gradient-text-primary">Drive Results</span>
+                <span className="text-gray-900 dark:text-white">Web & AI </span>
+                <span className="gradient-text-primary">Solutions</span>
               </h1>
             </motion.div>
 
@@ -72,11 +72,11 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-lg sm:text-xl text-gray-600 dark:text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Fullstack Developer with production experience in{" "}
+              Fullstack Systems Engineer with production experience in{" "}
               <span className="font-semibold text-gray-900 dark:text-white">React</span>,{" "}
               <span className="font-semibold text-gray-900 dark:text-white">Node.js</span> &{" "}
-              <span className="font-semibold text-gray-900 dark:text-white">TypeScript</span>.
-              I build scalable web apps, RESTful APIs, and e-commerce platforms that deliver real business results.
+              <span className="font-semibold text-gray-900 dark:text-white">Python</span>.
+              I build robust web apps, scalable APIs, and integrate AI seamlessly to deliver real business impact.
             </motion.p>
 
             {/* CTAs */}
@@ -156,7 +156,7 @@ const Hero: React.FC = () => {
               <motion.div
                 animate={{ y: [-5, 5, -5] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-4 top-8 px-4 py-2.5 bg-white dark:bg-zinc-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/30 border border-gray-200 dark:border-zinc-800"
+                className="absolute -right-4 top-8 px-4 py-2.5 bg-white dark:bg-zinc-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/30 border border-gray-200 dark:border-zinc-800 z-10"
               >
                 <p className="text-xs font-semibold text-gray-500 dark:text-zinc-500">Hackathon Wins</p>
                 <p className="text-lg font-bold text-gray-900 dark:text-white">3+</p>
@@ -165,10 +165,19 @@ const Hero: React.FC = () => {
               <motion.div
                 animate={{ y: [5, -5, 5] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -left-4 bottom-12 px-4 py-2 bg-white dark:bg-zinc-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/30 border border-gray-200 dark:border-zinc-800"
+                className="absolute -left-4 bottom-12 px-4 py-2 bg-white dark:bg-zinc-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/30 border border-gray-200 dark:border-zinc-800 z-10"
               >
                 <p className="text-xs font-semibold text-gray-500 dark:text-zinc-500">Clients Served</p>
                 <p className="text-lg font-bold text-gray-900 dark:text-white">Govt + Private</p>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [-4, 4, -4] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -right-8 bottom-0 lg:-right-12 lg:bottom-4 px-4 py-2 bg-white dark:bg-zinc-900 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/30 border border-gray-200 dark:border-zinc-800 z-10"
+              >
+                <p className="text-xs font-semibold text-gray-500 dark:text-zinc-500">Freelance Clients</p>
+                <p className="text-lg font-bold text-gray-900 dark:text-white">5+</p>
               </motion.div>
             </div>
           </motion.div>

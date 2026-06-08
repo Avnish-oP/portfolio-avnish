@@ -27,6 +27,7 @@ import {
   SiDocker,
   SiFastapi,
   SiExpress,
+  SiGooglegemini,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 
@@ -197,7 +198,36 @@ const projects: Project[] = [
     featured: false,
   },
   {
-    id: 3,
+  id: 3,
+  title: "Brain Dump",
+  subtitle: "AI-Powered Personal Knowledge Base",
+  category: "AI / SaaS",
+  description:
+    "A NotebookLM-inspired personal knowledge base with a full RAG pipeline. Drop in PDFs, YouTube links, websites, or plain text — query everything via natural language with HyDE, multi-query generation, and relevance gating.",
+  problem:
+    "Existing tools like NotebookLM are closed and opaque. I wanted to deeply understand how RAG pipelines actually work — and what breaks when you move from localhost to production.",
+  solution:
+    "Built a full-stack Next.js app with Upstash Vector (768-dim cosine index, per-user namespaces), Gemini embeddings, and a multi-stage retrieval pipeline: query translation → HyDE → multi-query → relevance gating → streamed response. Auth via NextAuth v5 with GitHub OAuth and OTP email verification backed by Upstash Redis + Resend.",
+  results: [
+    "Full RAG pipeline: HyDE + multi-query + relevance gating",
+    "Per-user vector namespaces — zero cross-user data leakage",
+    "OTP email verification with Redis rate limiting (3/hr, 5 attempts max)",
+    "Discovered pdf-parse breaks on Vercel serverless — no filesystem, no worker threads",
+  ],
+  image: "/images/braindump.png",
+  tags: ["Next.js", "Upstash Vector", "Gemini API", "MongoDB", "Redis", "RAG"],
+  techIcons: [
+    { icon: SiNextdotjs, name: "Next.js" },
+    { icon: SiMongodb, name: "MongoDB" },
+    { icon: SiRedis, name: "Redis" },
+    { icon: SiGooglegemini, name: "Gemini" },
+  ],
+  liveUrl: "https://braindump.avnishgupta.dev",
+  githubUrl: "https://github.com/Avnish-oP/brain-dump",  // update if different
+  featured: true,   // set false if you want OttiCamart as the only featured
+},
+  {
+    id: 7,
     title: "SHEILD AI",
     subtitle: "Secure Enterprise LLM Platform",
     category: "SaaS",
@@ -306,10 +336,59 @@ const projects: Project[] = [
     githubUrl: "https://github.com/Avnish-oP/prime-industries",
     featured: false,
   },
-  
+  {
+    id: 8,
+    title: "Ocean Data Viewer",
+    subtitle: "High-Performance Data Platform",
+    category: "Govt. Project",
+    description:
+      "A scalable full-stack platform for the visualization and analysis of large-scale oceanographic datasets, engineered for high performance.",
+    problem:
+      "Analysts needed to perform complex spatial queries and visualize massive datasets in real-time without latency bottlenecks.",
+    solution:
+      "Developed a robust backend architecture using PostGIS for spatial indexing and Redis for caching, coupled with interactive frontend visualization tools.",
+    results: [
+      "Handled 56M+ rows of data efficiently",
+      "Reduced query latency to milliseconds",
+      "Implemented point, polygon, and transect-based spatial analysis",
+    ],
+    image: "/images/globe.png", // Placeholder image, replace with actual if needed
+    tags: ["PostGIS", "Redis", "React", "Node.js"],
+    techIcons: [
+      { icon: SiPostgresql, name: "PostgreSQL" },
+      { icon: SiRedis, name: "Redis" },
+      { icon: SiReact, name: "React" },
+      { icon: SiNodedotjs, name: "Node.js" },
+    ],
+    featured: false,
+  },
+  {
+    id: 9,
+    title: "ENC Viewer",
+    subtitle: "Maritime Geospatial Visualization",
+    category: "Govt. Project",
+    description:
+      "A React-based Electronic Navigational Chart (ENC) Viewer designed for real-time maritime geospatial analysis.",
+    problem:
+      "Needed a specialized, interactive map application to visualize navigational charts and perform complex spatial processing in the browser.",
+    solution:
+      "Built a high-performance frontend using React and Turf.js to execute local spatial analysis directly on the client side.",
+    results: [
+      "Built and optimized 7+ interactive GIS analysis tools",
+      "Achieved 85% test coverage using Jest and React Testing Library",
+      "Followed rigorous Test-Driven Development (TDD) practices",
+    ],
+    image: "/images/globe.png", // Placeholder image, replace with actual if needed
+    tags: ["React", "Turf.js", "Jest", "GIS"],
+    techIcons: [
+      { icon: SiReact, name: "React" },
+      { icon: SiTypescript, name: "TypeScript" },
+    ],
+    featured: false,
+  },
 ];
 
-const categories = ["All", "E-Commerce", "Web App", "SaaS", "Freelance", "Portal"];
+const categories = ["All", "E-Commerce", "Web App", "SaaS", "Freelance", "Portal", "Govt. Project"];
 
 const ModernProjects = ({ showAll = false }: { showAll?: boolean }) => {
   const ref = useRef(null);
