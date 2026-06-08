@@ -5,8 +5,16 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github-dark.css";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
+import CopyButton from "@/components/CopyButton";
+
+const extractText = (node: any): string => {
+  if (node.type === 'text') return node.value;
+  if (node.children) return node.children.map(extractText).join('');
+  return '';
+};
 
 type Props = {
   params: { slug: string };
@@ -116,6 +124,19 @@ export default function BlogPostPage({ params }: Props) {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeHighlight]}
+              components={{
+                pre: ({ node, children, ...props }: any) => {
+                  const rawText = extractText(node);
+                  return (
+                    <div className="relative group">
+                      <CopyButton text={rawText} />
+                      <pre {...props} className="m-0 bg-[#0d1117] overflow-x-auto rounded-lg">
+                        {children}
+                      </pre>
+                    </div>
+                  );
+                }
+              }}
             >
               {post.content}
             </ReactMarkdown>

@@ -23,43 +23,52 @@ LangGraph treats your agent's reasoning as a state machine (specifically, a dire
 
 Here's how you might define a simple agent that decides whether to search the web or respond directly:
 
-```python
-from langgraph.graph import StateGraph, END
-from typing import TypedDict, Annotated
-import operator
+```typescript
+import { StateGraph, END } from "@langchain/langgraph";
 
-# Define the state schema
-class AgentState(TypedDict):
-    messages: Annotated[list, operator.add]
-    next_step: str
+// Define the state schema
+const agentState = {
+  messages: {
+    value: (x, y) => x.concat(y),
+    default: () => [],
+  },
+  next_step: {
+    value: (x, y) => y ?? x,
+    default: () => "respond",
+  }
+};
 
-def thinking_node(state: AgentState):
-    # Logic to decide next step using an LLM
-    decision = "use_tool" if len(state["messages"]) < 3 else "respond"
-    return {"next_step": decision}
+const thinkingNode = (state) => {
+  // Logic to decide next step using an LLM
+  const decision = state.messages.length < 3 ? "use_tool" : "respond";
+  return { next_step: decision };
+};
 
-def tool_node(state: AgentState):
-    # Perform some vector search or API call
-    return {"messages": ["Found some data!"]}
+const toolNode = (state) => {
+  // Perform some vector search or API call
+  return { messages: ["Found some data!"] };
+};
 
-# Build the graph
-workflow = StateGraph(AgentState)
-workflow.add_node("think", thinking_node)
-workflow.add_node("tool", tool_node)
+// Build the graph
+const workflow = new StateGraph({ channels: agentState });
 
-# Add edges
-workflow.add_conditional_edges(
-    "think",
-    lambda x: x["next_step"],
-    {
-        "use_tool": "tool",
-        "respond": END
-    }
-)
-workflow.add_edge("tool", "think")
-workflow.set_entry_point("think")
+workflow.addNode("think", thinkingNode);
+workflow.addNode("tool", toolNode);
 
-app = workflow.compile()
+// Add edges
+workflow.addConditionalEdges(
+  "think",
+  (state) => state.next_step,
+  {
+    use_tool: "tool",
+    respond: END,
+  }
+);
+
+workflow.addEdge("tool", "think");
+workflow.setEntryPoint("think");
+
+const app = workflow.compile();
 ```
 
 ## Tracing and Observability
