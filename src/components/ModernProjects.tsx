@@ -96,9 +96,11 @@ const TiltCard = ({ children }: { children: React.ReactNode }) => {
 const ParallaxImage = ({ src, alt }: { src: string; alt: string }) => {
   const context = React.useContext(TiltContext);
   
-  // Hooks must be called unconditionally
-  const x = context ? context.x : useMotionValue(0);
-  const y = context ? context.y : useMotionValue(0);
+  const defaultX = useMotionValue(0);
+  const defaultY = useMotionValue(0);
+  
+  const x = context ? context.x : defaultX;
+  const y = context ? context.y : defaultY;
 
   const imageX = useSpring(useMotionTemplate`calc(${x}px * -0.05)`, { stiffness: 200, damping: 20 });
   const imageY = useSpring(useMotionTemplate`calc(${y}px * -0.05)`, { stiffness: 200, damping: 20 });

@@ -53,7 +53,8 @@ function Navbar() {
   const navLinks = [
     { name: "Home", href: "/", sectionId: "hero" },
     { name: "Work", href: "/projects", sectionId: "work" },
-    { name: "Resume", href: "/resume", sectionId: "about" }, // Assuming about links to resume mostly
+    { name: "Resume", href: "/resume", sectionId: "about" },
+    { name: "Blogs", href: "/blogs", sectionId: "blogs" },
     { name: "Contact", href: "/contact", sectionId: "contact" },
   ];
 
@@ -81,9 +82,9 @@ function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
-              // Active if we're on the dedicated page OR if we're on the homepage and scrolling through the section
               const isActive = 
                 pathname === link.href || 
+                (link.href !== "/" && pathname.startsWith(link.href)) ||
                 (pathname === "/" && activeSection === link.sectionId && link.href !== "/");
                 
               const isHomeActive = pathname === "/" && (activeSection === "hero" || activeSection === "");

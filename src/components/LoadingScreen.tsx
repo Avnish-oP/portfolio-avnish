@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const loadingWords = ["Welcome", "Loading", "Almost there", "Get ready"];
+
 const LoadingScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentWord, setCurrentWord] = useState(0);
-
-  const loadingWords = ["Welcome", "Loading", "Almost there", "Get ready"];
 
   useEffect(() => {
     // Check if user has visited before
