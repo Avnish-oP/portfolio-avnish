@@ -6,6 +6,9 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Blogs | Avnish Kumar",
   description: "Read my latest articles on AI, System Engineering, Next.js, and more.",
+  alternates: {
+    canonical: "/blogs",
+  },
 };
 
 export default function BlogsPage() {
