@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -104,6 +105,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
