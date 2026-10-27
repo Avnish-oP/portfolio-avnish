@@ -1,4 +1,3 @@
 declare module "@georgedoescode/spline" {
-    export function spline(data: any): any;
-  }
-  
+  export function spline(data: any): any;
+}

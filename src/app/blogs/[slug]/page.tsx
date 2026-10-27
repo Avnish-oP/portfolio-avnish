@@ -1,150 +1,105 @@
-import React from "react";
-import { getBlogPostBySlug, getAllBlogPosts } from "@/lib/blogs";
-import { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github-dark.css";
-import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
-import CopyButton from "@/components/CopyButton";
-
-const extractText = (node: any): string => {
-  if (node.type === 'text') return node.value;
-  if (node.children) return node.children.map(extractText).join('');
-  return '';
-};
-
-type Props = {
-  params: { slug: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/blogs";
+import { JsonLd } from "@/components/studio/Shared";
+import { pageMetadata, breadcrumbs } from "@/lib/seo";
+import { site } from "@/content/studio";
+type Props = { params: Promise<{ slug: string }> };
+export function generateStaticParams() {
+  return getAllBlogPosts().map(({ slug }) => ({ slug }));
+}
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
   try {
-    const post = getBlogPostBySlug(params.slug);
+    const post = getBlogPostBySlug(slug);
+    const metadata = pageMetadata(
+      post.title,
+      post.description,
+      `/blogs/${slug}`,
+    );
     return {
-      title: `${post.title} | Avnish Kumar`,
-      description: post.description,
+      ...metadata,
       openGraph: {
-        title: post.title,
-        description: post.description,
-        type: "article",
-        url: `https://avnishgupta.dev/blogs/${post.slug}`,
-        authors: ["Avnish Kumar"],
+        ...metadata.openGraph,
+        type: "article" as const,
         publishedTime: post.date,
-        tags: post.tags,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: post.title,
-        description: post.description,
-      },
-      alternates: {
-        canonical: `/blogs/${post.slug}`,
+        authors: [site.name],
       },
     };
-  } catch (error) {
-    return {
-      title: "Post Not Found",
-    };
+  } catch {
+    return {};
   }
 }
-
-export async function generateStaticParams() {
-  const posts = getAllBlogPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-export default function BlogPostPage({ params }: Props) {
+export default async function Article({ params }: Props) {
+  const { slug } = await params;
   let post;
   try {
-    post = getBlogPostBySlug(params.slug);
-  } catch (error) {
+    post = getBlogPostBySlug(slug);
+  } catch {
     notFound();
   }
-
-  // JSON-LD for AI and Search Engines
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    image: post.coverImage || "https://avnishgupta.dev/images/dp.png",
-    datePublished: post.date,
-    dateModified: post.date,
-    author: [
-      {
-        "@type": "Person",
-        name: "Avnish Kumar",
-        url: "https://avnishgupta.dev",
-      },
-    ],
-    description: post.description,
-    keywords: post.tags.join(", "),
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://avnishgupta.dev/blogs/${post.slug}`,
-    },
-  };
-
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950 pt-32 pb-24 px-4 sm:px-6 lg:px-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.description,
+          datePublished: post.date,
+          dateModified: post.date,
+          image: `${site.url}/opengraph-image`,
+          author: {
+            "@type": "Person",
+            "@id": `${site.url}/#person`,
+            name: site.name,
+            url: `${site.url}/about`,
+          },
+          mainEntityOfPage: `${site.url}/blogs/${post.slug}`,
+        }}
       />
-      <article className="max-w-3xl mx-auto">
-          <Link href="/blogs" className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors mb-10">
-            <FaArrowLeft /> Back to blogs
+      <JsonLd
+        data={breadcrumbs([
+          { name: "Insights", path: "/blogs" },
+          { name: post.title, path: `/blogs/${slug}` },
+        ])}
+      />
+      <article className="shell">
+        <header className="page-header">
+          <Link className="text-link mb-8" href="/blogs">
+            ← All insights
           </Link>
-
-          <header className="mb-12">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight mb-6">
-              {post.title}
-            </h1>
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-zinc-400">
-              <time dateTime={post.date} suppressHydrationWarning>
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </time>
-              <span>•</span>
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-gray-100 dark:bg-zinc-800 px-3 py-1 font-medium">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </header>
-
-          <div className="prose prose-lg dark:prose-invert prose-indigo max-w-none">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeHighlight]}
-              components={{
-                pre: ({ node, children, ...props }: any) => {
-                  const rawText = extractText(node);
-                  return (
-                    <div className="relative group">
-                      <CopyButton text={rawText} />
-                      <pre {...props} className="m-0 bg-[#0d1117] overflow-x-auto rounded-lg">
-                        {children}
-                      </pre>
-                    </div>
-                  );
-                }
-              }}
-            >
-              {post.content}
-            </ReactMarkdown>
+          <h1>{post.title}</h1>
+          <p>{post.description}</p>
+          <div className="article-meta">
+            <span>{site.name}</span>
+            <time dateTime={post.date}>
+              {new Date(post.date).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+                timeZone: "UTC",
+              })}
+            </time>
           </div>
-        </article>
-      </div>
+        </header>
+        <div className="article-body">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{ h1: ({ children }) => <h2>{children}</h2> }}
+          >
+            {post.content}
+          </ReactMarkdown>
+          <div className="notice">
+            <p>Working on an application or AI workflow?</p>
+            <Link href="/services/ai-workflow-automation">
+              Explore AI integration and workflow services ↗
+            </Link>
+          </div>
+        </div>
+      </article>
+    </>
   );
 }

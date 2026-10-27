@@ -1,112 +1,86 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope, Newsreader } from "next/font/google";
 import "./globals.css";
-import "highlight.js/styles/github-dark.css";
+import MotionLayer from "@/components/studio/MotionLayer";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/theme-provider";
-import CustomCursor from "@/components/CustomCursor";
-import ScrollProgress from "@/components/ScrollProgress";
 import { Analytics } from "@vercel/analytics/react";
-
-const inter = Inter({ subsets: ["latin"] });
-
+import { JsonLd } from "@/components/studio/Shared";
+import { site } from "@/content/studio";
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-editorial",
+  display: "swap",
+});
 export const metadata: Metadata = {
-  metadataBase: new URL('https://avnishgupta.dev'),
-  title: "Avnish Kumar | AI Software Engineer & Full-Stack Developer",
+  metadataBase: new URL(site.url),
+  title: {
+    default: "Avnish Gupta | Freelance Backend & AI Developer",
+    template: "%s | Avnish Gupta",
+  },
   description:
-    "Avnish Kumar is an AI Software Engineer and Full-Stack Developer building scalable web applications, RAG pipelines, and intelligent SaaS platforms.",
-  keywords: ["AI Software Engineer", "Full-Stack Developer", "Next.js", "Python", "RAG", "LangChain", "Avnish Kumar", "Portfolio", "Freelance"],
+    "Independent developer building backend systems, AI-powered workflows and full-stack business applications. Based in India, working with clients worldwide.",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://avnishgupta.dev",
-    siteName: "Avnish Kumar",
-    title: "Avnish Kumar | AI Software Engineer & Full-Stack Developer",
-    description: "Building scalable web applications, RAG pipelines, and intelligent SaaS platforms.",
-    images: [
-      {
-        url: "/images/dp.png", // Ensure this exists or change to your actual OG image
-        width: 800,
-        height: 600,
-        alt: "Avnish Kumar",
-      },
-    ],
+    siteName: "Avnish Gupta",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Avnish Kumar | AI Software Engineer & Full-Stack Developer",
-    description: "Building scalable web applications, RAG pipelines, and intelligent SaaS platforms.",
-    creator: "@Avnish__gupta", // Your twitter handle
-    images: ["/images/dp.png"],
-  },
-  icons: {
-    icon: "/images/dp.png",
-    apple: "/images/dp.png",
-  },
+  twitter: { card: "summary_large_image", creator: "@Avnish__gupta" },
 };
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://avnishgupta.dev/#person",
-      name: "Avnish Kumar",
-      url: "https://avnishgupta.dev",
-      jobTitle: "AI Software Engineer",
-      sameAs: [
-        "https://www.linkedin.com/in/avnish-gupta-23245a273/",
-        "https://github.com/Avnish-oP",
-        "https://twitter.com/Avnish__gupta"
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://avnishgupta.dev/#website",
-      url: "https://avnishgupta.dev",
-      name: "Avnish Kumar Portfolio",
-      publisher: {
-        "@id": "https://avnishgupta.dev/#person"
-      }
-    }
-  ]
-};
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} overflow-x-hidden`}>
+      <head>
         <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:'system'}catch(e){}})();`,
+          }}
         />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={true}
-        >
-          {/* Subtle noise texture overlay */}
-          <div className="pointer-events-none fixed inset-0 z-[100] h-full w-full opacity-[0.03] mix-blend-overlay">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
-              <filter id="noiseFilter">
-                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
-              </filter>
-              <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-            </svg>
-          </div>
-
-          <CustomCursor />
-          <ScrollProgress />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <Analytics />
-        </ThemeProvider>
+      </head>
+      <body className={`${manrope.variable} ${newsreader.variable}`}>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Person",
+                "@id": `${site.url}/#person`,
+                name: site.name,
+                url: site.url,
+                jobTitle: "Independent software developer",
+                sameAs: [
+                  "https://github.com/Avnish-oP",
+                  "https://www.linkedin.com/in/avnish-gupta-23245a273/",
+                ],
+              },
+              {
+                "@type": "WebSite",
+                "@id": `${site.url}/#website`,
+                name: site.name,
+                url: site.url,
+                publisher: { "@id": `${site.url}/#person` },
+              },
+            ],
+          }}
+        />
+        <MotionLayer />
+        <Navbar />
+        <main id="main-content">{children}</main>
+        <Footer />
+        <Analytics />
       </body>
     </html>
   );

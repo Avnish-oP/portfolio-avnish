@@ -1,17 +1,13 @@
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Resume | Avnish Kumar",
-  description: "View my resume, work experience, and educational background.",
-  alternates: {
-    canonical: "/resume",
-  },
-};
-
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata(
+  "Résumé",
+  "View or download Avnish Gupta’s résumé, including software engineering experience, technical strengths and education.",
+  "/resume",
+);
 export default function ResumeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 }

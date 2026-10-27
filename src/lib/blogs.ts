@@ -22,7 +22,8 @@ export function getBlogSlugs() {
 }
 
 export function getBlogPostBySlug(slug: string): BlogPost {
-  const realSlug = slug.replace(/\.md$/, "");
+  if (!/^[a-z0-9-]+$/.test(slug)) throw new Error("Invalid article slug");
+  const realSlug = slug;
   const fullPath = path.join(blogsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
@@ -42,7 +43,7 @@ export function getAllBlogPosts(): BlogPost[] {
   const slugs = getBlogSlugs();
   const posts = slugs
     .filter((slug) => slug.endsWith(".md"))
-    .map((slug) => getBlogPostBySlug(slug))
+    .map((slug) => getBlogPostBySlug(slug.replace(/\.md$/, "")))
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
 }

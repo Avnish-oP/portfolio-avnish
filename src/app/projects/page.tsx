@@ -1,13 +1,25 @@
-"use client";
-import React from "react";
-import ModernProjects from "@/components/ModernProjects";
-
-const ProjectsPage = () => {
+import { ProjectList, ContactCallout } from "@/components/studio/Shared";
+export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950 pt-20">
-      <ModernProjects showAll={true} />
-    </div>
+    <>
+      <header className="page-header shell">
+        <div className="eyebrow">
+          Selected work / The details behind the delivery
+        </div>
+        <h1>
+          From business tools.
+          <br />
+          <em>To AI experiments.</em>
+        </h1>
+        <p>
+          Client work, independent applications and hackathon projects. Explore
+          the interfaces, the engineering and the context behind each build.
+        </p>
+      </header>
+      <section className="shell section" aria-label="Published case studies">
+        <ProjectList />
+      </section>
+      <ContactCallout />
+    </>
   );
-};
-
-export default ProjectsPage;
+}
